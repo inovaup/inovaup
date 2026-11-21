@@ -1,10 +1,19 @@
 # Dependências
 node_modules/
 
+/.pnp
+.pnp.*
+
 # Next.js
 .next/
 out/
+/build
 next-env.d.ts
+*.tsbuildinfo
+.vercel
+
+# Certificados e chaves
+*.pem
 
 # Ambiente e segredos: nunca versionar
 .env
@@ -29,3 +38,6 @@ Thumbs.db
 *.mp4
 *.mov
 *Transcri*
+
+# Configurações locais do Claude Code
+.claude/
