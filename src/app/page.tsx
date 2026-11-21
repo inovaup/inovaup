@@ -1,36 +1,26 @@
-import { AuthButton } from "@/components/auth-button";
 import { EnvVarWarning } from "@/components/env-var-warning";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+import { Button } from "@/components/ui/button";
+import { getCurrentUser } from "@/lib/auth/sessao";
 import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
-import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  if (hasEnvVars && (await getCurrentUser())) redirect("/inicio");
+
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-          <Link href="/" className="font-semibold">
-            InovaUp
-          </Link>
-          {!hasEnvVars ? (
-            <EnvVarWarning />
-          ) : (
-            <Suspense>
-              <AuthButton />
-            </Suspense>
-          )}
-        </div>
-      </nav>
-      <div className="flex-1 flex flex-col gap-6 max-w-5xl w-full p-5 py-16">
-        <h1 className="text-3xl font-bold">InovaUp</h1>
-        <p className="text-muted-foreground">
-          Gestão de pessoas da Empresa Júnior ADM UFBA.
-        </p>
-      </div>
-      <footer className="w-full flex items-center justify-center border-t text-xs py-8">
-        <ThemeSwitcher />
-      </footer>
+    <main className="min-h-screen flex flex-col items-center justify-center gap-6 p-5">
+      <h1 className="text-3xl font-bold">InovaUp</h1>
+      <p className="text-muted-foreground">
+        Gestão de pessoas da Empresa Júnior ADM UFBA.
+      </p>
+      {hasEnvVars ? (
+        <Button asChild>
+          <Link href="/auth/login">Entrar</Link>
+        </Button>
+      ) : (
+        <EnvVarWarning />
+      )}
     </main>
   );
 }
