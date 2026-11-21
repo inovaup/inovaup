@@ -1,0 +1,51 @@
+{
+  "pessoas": [
+    {
+      "chave": "GP",
+      "nome": "Gestora GP Demo",
+      "email": "gp@demo.inovaup.test",
+      "area": "Gestão de Pessoas",
+      "cargo": "Diretor(a) de Gestão de Pessoas",
+      "nivel": null,
+      "papel": "gp",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "LIDER",
+      "nome": "Líder Demo",
+      "email": "lider@demo.inovaup.test",
+      "area": "Projetos",
+      "cargo": "Head de Projetos",
+      "nivel": null,
+      "papel": "lider",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "COLABORADOR1",
+      "nome": "Colaborador Demo Um",
+      "email": "colaborador1@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "COLABORADOR2",
+      "nome": "Colaboradora Demo Dois",
+      "email": "colaborador2@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "trainee"
+    }
+  ],
+  "squads": ["Squad Demo Alfa", "Squad Demo Beta"],
+  "participacoes": [
+    { "pessoa": "LIDER", "squad": "Squad Demo Alfa", "inicio": "2026-03-01", "fim": null },
+    { "pessoa": "COLABORADOR1", "squad": "Squad Demo Alfa", "inicio": "2026-03-01", "fim": "2026-07-31" },
+    { "pessoa": "COLABORADOR1", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null },
+    { "pessoa": "COLABORADOR2", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null }
+  ]
+}
