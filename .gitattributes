@@ -1,0 +1,9 @@
+# Fim de linha padronizado (LF) nos dois computadores Windows
+* text=auto eol=lf
+
+# Binários
+*.png binary
+*.jpg binary
+*.ico binary
+*.pdf binary
+*.xlsx binary

@@ -1,0 +1,31 @@
+# Dependências
+node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Ambiente e segredos: nunca versionar
+.env
+.env.*
+!.env.example
+
+# Supabase (arquivos locais da CLI)
+supabase/.temp/
+supabase/.branches/
+
+# Testes
+coverage/
+playwright-report/
+test-results/
+
+# Logs e sistema
+*.log
+.DS_Store
+Thumbs.db
+
+# Materiais que não podem entrar no repositório (dados de pessoas)
+*.mp4
+*.mov
+*Transcri*
