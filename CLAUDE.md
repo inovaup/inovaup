@@ -17,13 +17,24 @@ InovaUp é o sistema interno de gestão de pessoas da Empresa Júnior ADM UFBA, 
 
 | Pasta / arquivo | Dono | Regra para o outro |
 |---|---|---|
-| `supabase/migrations/`, `supabase/seed/` | **Davi** | Só o Davi cria migrações; o Daniel pede por issue ou PR avisado |
+| `supabase/` (`migrations/`, `seed/`, `config.toml`; criados na F4) | **Davi** | Só o Davi cria migrações; o Daniel pede por issue ou PR avisado |
 | `src/contracts/core.ts`, `src/contracts/avaliacao.ts` | **Davi** | Mudança de contrato só pelo dono, em PR avisado |
 | `src/modules/nucleo/`, `src/modules/avaliacao/dados/`, `src/modules/avaliacao/calculo/` | **Davi** | — |
-| `src/lib/auth/`, `src/lib/supabase/` | **Daniel** | `getCurrentUser()` e `requireRole()` são o contrato I2 |
-| `src/app/` (rotas, layout, menu), `src/modules/avaliacao/resposta/`, `relatorio/`, `painel/` | **Daniel** | — |
-| `package.json`, `package-lock.json`, `next.config.*`, CI | Quem precisar, **num PR só para isso, avisado** | O outro atualiza a branch depois do merge |
-| `docs/`, `CLAUDE.md` | Ambos | Sempre por PR |
+| `src/lib/supabase/` (`client.ts`, `server.ts` e `proxy.ts`, vindos do modelo), `src/lib/auth/` (criado na F5), `src/proxy.ts` | **Daniel** | `getCurrentUser()` e `requireRole()` são o contrato I2. **Não crie outro cliente Supabase:** use `createClient()` de `src/lib/supabase/server.ts` (servidor) ou de `client.ts` (navegador) |
+| `src/app/` (rotas, `layout.tsx`, `auth/`, a área provisória `protected/`), `src/components/` (formulários de login e menu), `src/modules/avaliacao/resposta/`, `relatorio/`, `painel/` | **Daniel** | — |
+| `src/components/ui/` (componentes do `shadcn/ui`) | Compartilhado | Componente novo com `npx shadcn@latest add <nome>`, num PR avisado; não editar os existentes sem combinar |
+| `package.json`, `package-lock.json`, `next.config.ts`, `tsconfig.json`, `eslint.config.mjs`, `tailwind.config.ts`, `postcss.config.mjs`, `components.json`, `vitest.config.ts`, `.env.example`, `.github/` | Quem precisar, **num PR só para isso, avisado** | O outro atualiza a branch depois do merge |
+| `docs/`, `CLAUDE.md`, `HANDOFF_DAVI.md`, `README.md` | Ambos | Sempre por PR |
+
+## Projeto instalado (F2, 21/11/2026)
+
+- Next.js **16.4.6** (App Router, código em `src/`), React 19.3.1, `@supabase/ssr` 0.12.7, `@supabase/supabase-js` 2.119.2, Tailwind 3.4, `shadcn/ui` (estilo new-york), TypeScript 5.9, ESLint 9, Vitest 5.1. Node 22 ou mais novo. As versões são fixas; não troque sem um PR avisado.
+- `@/*` aponta para `src/*` (no `tsconfig.json` e no `vitest.config.ts`).
+- `src/proxy.ts` mantém a sessão do Supabase. No Next.js 16, ele substitui o antigo `middleware.ts`.
+- As telas de `src/app/auth/` vieram do modelo, em inglês. A F5 remove o cadastro (`sign-up` e `sign-up-success`), traduz o login e cria `src/lib/auth/`.
+- **Comandos:** `npm run dev`, `npm run build`, `npm run lint`, `npm run typecheck`, `npm test`.
+- **Testes:** `src/**/*.test.ts` ou `tests/**/*.test.ts`.
+- **Variáveis:** copie `.env.example` para `.env.local`, que nunca vai para o Git.
 
 **Contratos entre as raias** (até a data, quem consome usa tipos simulados):
 - **I1**, 23/11: núcleo (Davi → Daniel);
@@ -84,5 +95,5 @@ InovaUp é o sistema interno de gestão de pessoas da Empresa Júnior ADM UFBA, 
 
 - Interface e documentação em português. Nomes de domínio em português sem acento (`perfis`, `avaliacoes`, `calcularResultado`). Os helpers de autenticação seguem o padrão em inglês (`getCurrentUser`, `requireRole`).
 - Tabelas e colunas em `snake_case`; componentes React em `PascalCase`.
-- **Next.js:** confira a versão instalada antes de usar uma API. Se existir documentação local em `node_modules/next/dist/docs`, leia antes, porque as APIs podem ser mais novas que o conhecimento do modelo.
+- **Next.js 16:** as APIs podem ser mais novas que o conhecimento do modelo. **Antes de usar rotas, `proxy`, cache ou server actions, leia a documentação local** em `node_modules/next/dist/docs/` (pastas `01-app/` e `03-architecture/`).
 - Ambiente: Windows, sem Docker local. Os testes de RLS rodam contra o banco de dev de cada um e, no CI, contra o Supabase local do GitHub Actions.
