@@ -15,4 +15,11 @@ Registro curto do que cada um aprendeu sobre branch, PR e revisão, rotas do App
 
 ## Davi
 
-<!-- O Davi escreve aqui, de 5 a 10 linhas. -->
+- **Branch e commits:** cada tarefa teve a sua branch (`feature/F4-nucleo`, `feature/F6-ci-hook`) com commits pequenos, um por etapa. Quando um arquivo compartilhado precisou mudar (`package.json` para o `npm run seed`), ele foi num PR separado, como pede o `CLAUDE.md`.
+- **PR e revisão:** o PR só fica pronto com o template preenchido; na primeira vez a descrição ficou vazia e precisei editar. O Daniel revisou o nº 4 e pediu provas antes do merge (saída dos testes, cadastro desligado e como passei as senhas), e respondi tudo no próprio PR.
+- **Conflito:** o PR nº 6 parou de rodar o CI porque mexia na linha vizinha da F5 no `TAREFAS.md`; trouxe a `main` para a branch, mantive as duas linhas e o CI voltou a rodar.
+- **CI e hook:** o CI sobe um Supabase temporário a cada PR e testa as migrações do zero, sem tocar no banco de dev. Para provar que ele barra erro, abri um PR de rascunho com a RLS quebrada de propósito: ficou vermelho ("colaborador vê 3 perfis") e foi fechado sem merge. O hook de pre-push bloqueia push direto na `main`.
+- **App Router:** cada pasta em `src/app/` com um `page.tsx` vira uma rota; vi isso rodando o site em `localhost:3000`, onde a GP abre `/pessoas` e o colaborador recebe "Acesso negado".
+- **RLS:** a tabela começa negando tudo, e cada política libera só o necessário. Usuários só leem; quem grava `perfis` (inclusive o `papel`) é a semente, com a `service_role`. A função `eh_gp()` é `security definer` com `search_path` fixo, para a RLS consultar o papel sem cair em recursão.
+- **Migrações:** são arquivos SQL novos, aplicados com `npx supabase db push --remote`; uma migração já aplicada nunca é editada, o ajuste vira outra migração.
+- **Segredos:** a chave publicável pode ir para o navegador porque quem protege os dados é a RLS; a secreta fica só no `.env.local`, que o Git ignora. Senhas e chaves não vão para o chat, o GitHub nem o Claude.
