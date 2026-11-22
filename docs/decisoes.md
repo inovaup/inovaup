@@ -21,6 +21,7 @@ Registro curto. Uma decisão nova ou mudada entra aqui por PR revisado pelo outr
 | D-13 | Supressão contra identificação indireta (mínimo de 2, supressão complementar de grupos), aplicada antes de gravar o relatório | 20/11/2026 | Substitui o antigo RNF-03 ("avisar quando o grupo tem uma pessoa") |
 | D-14 | Cache Components do Next.js desligado | 20/11/2026 | Evita misturar dados de usuários em cache |
 | D-15 | Este repositório é a fonte de verdade; os docs antigos do claude.ai ficam como referência | 20/11/2026 | — |
+| D-16 | Um projeto Supabase de **desenvolvimento compartilhado** pelos dois e um projeto de **demo** (opção 1), por causa do limite de 2 projetos gratuitos por pessoa | 21/11/2026 | Só o Davi aplica migrações no banco compartilhado; ninguém apaga ou altera dados que o outro esteja usando; testes que gravam dados rodam no Supabase local do CI |
 
 ## Pendentes
 

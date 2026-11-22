@@ -17,7 +17,7 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | F3 | Projetos Supabase (dev e demo) | Davi / Daniel | — | 0,5 / 1 · 1 / 2 | 22/11 | [ ] |
 | F4 | Núcleo, RLS e semente (I1) | Davi | Daniel | 4 / 6 | 22–23/11 | [x] |
 | F6 | CI e hook de pre-push | Davi | Daniel | 3 / 5 | 23–24/11 | [x] |
-| F5 | Login, sessão, papéis, menu e listagem (I2) | Daniel | Davi | 4 / 6 | 23–25/11 | [ ] |
+| F5 | Login, sessão, papéis, menu e listagem (I2) | Daniel | Davi | 4 / 6 | 23–25/11 | [x] |
 | **G1** | **Portão: núcleo, login e CI verdes** | — | — | — | 24/11 | [ ] |
 | A1 | Modelo da avaliação (I3) | Davi | Daniel | 5 / 7,5 | 25–27/11 | [ ] |
 | A2 | Semente do ciclo de demonstração | Davi | Daniel | 2 / 3 | 27/11 | [ ] |
@@ -70,9 +70,8 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 
 ### F3 — Projetos Supabase (Davi 0,5 h; Daniel 1 h · IA 5 min)
 - **Construir:**
-  - **Davi:** 1 projeto de desenvolvimento;
-  - **Daniel:** 1 projeto de desenvolvimento e 1 projeto **demo**;
-  - todos na região São Paulo, na organização pessoal de cada um (limite gratuito: 2 projetos por pessoa dona ou administradora);
+  - **Atualizado em 21/11 (D-16):** 1 projeto de desenvolvimento **compartilhado** pelos dois e 1 projeto **demo**, na região São Paulo (limite gratuito: 2 projetos por pessoa dona ou administradora);
+  - as mesmas chaves do projeto compartilhado vão no `.env.local` dos dois computadores, nunca no repositório nem no chat;
   - em todos: **"Allow new users to sign up" desligado**;
   - URL e chaves em `.env.local`.
 - **Depende de** F1 → **entrega:** bancos criados.
