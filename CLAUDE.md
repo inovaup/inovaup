@@ -96,4 +96,4 @@ InovaUp é o sistema interno de gestão de pessoas da Empresa Júnior ADM UFBA, 
 - Interface e documentação em português. Nomes de domínio em português sem acento (`perfis`, `avaliacoes`, `calcularResultado`). Os helpers de autenticação seguem o padrão em inglês (`getCurrentUser`, `requireRole`).
 - Tabelas e colunas em `snake_case`; componentes React em `PascalCase`.
 - **Next.js 16:** as APIs podem ser mais novas que o conhecimento do modelo. **Antes de usar rotas, `proxy`, cache ou server actions, leia a documentação local** em `node_modules/next/dist/docs/` (pastas `01-app/` e `03-architecture/`).
-- Ambiente: Windows, sem Docker local. Os testes de RLS rodam contra o banco de dev de cada um e, no CI, contra o Supabase local do GitHub Actions.
+- Ambiente: Windows, sem Docker local. O banco de desenvolvimento é **compartilhado** (D-16): só o Davi aplica migrações nele, e ninguém apaga ou altera dados que o outro esteja usando. Testes que gravam dados rodam no CI, contra o Supabase local do GitHub Actions.
