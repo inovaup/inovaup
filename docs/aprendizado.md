@@ -11,7 +11,7 @@ Registro curto do que cada um aprendeu sobre branch, PR e revisão, rotas do App
 - **Proteção das páginas:** o layout não roda de novo a cada navegação, então cada página chama `requireRole()` no servidor; o menu escondido não protege nada sozinho.
 - **RLS:** a regra de quem lê o quê fica no banco, não na tela. Com a sessão da própria GP, `/pessoas` traz as 4 pessoas; com a do colaborador, a mesma consulta traria só o próprio perfil.
 - **Papel:** o papel vem da tabela `perfis`, escrita só pela semente; nunca de `user_metadata`, que o próprio usuário consegue editar.
-- **Segredos:** o `.env.local` nunca vai para o Git; a chave `service_role` fica só com quem roda a semente, e senhas não passam pelo chat.
+- **Segredos:** o `.env.local` nunca vai para o Git; a chave `service_role` fica só no `.env.local` de quem roda a semente, nunca no repositório nem no chat; senhas não passam pelo chat.
 
 ## Davi
 
