@@ -1,24 +1,12 @@
 import { requireRole } from "@/lib/auth/sessao";
 import { createClient } from "@/lib/supabase/server";
 
-// PREMISSA até o contrato I1 (Davi): nomes das tabelas e colunas conforme
-// docs/TAREFAS.md (F4). Ajustar a src/contracts/core.ts quando ele for juntado.
-type PessoaLinha = {
-  id: string;
-  nome: string;
-  area: string | null;
-  cargo: string | null;
-  nivel: string | null;
-  papel: string;
-  situacao: string | null;
-};
-type SquadLinha = { id: string; nome: string };
-type ParticipacaoLinha = {
-  squad_id: string;
-  perfil_id: string;
-  inicio: string | null;
-  fim: string | null;
-};
+import type { ParticipacaoSquad, Perfil, Squad } from "@/contracts/core";
+
+// Tipos do contrato I1 (src/contracts/core.ts), só com as colunas lidas aqui.
+type PessoaLinha = Pick<Perfil, "id" | "nome" | "area" | "cargo" | "nivel" | "papel" | "situacao">;
+type SquadLinha = Pick<Squad, "id" | "nome">;
+type ParticipacaoLinha = Pick<ParticipacaoSquad, "squad_id" | "perfil_id" | "inicio" | "fim">;
 
 export default async function PessoasPage() {
   await requireRole("gp");
@@ -39,8 +27,7 @@ export default async function PessoasPage() {
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">Pessoas e squads</h1>
         <p className="text-sm text-muted-foreground">
-          Não foi possível carregar os dados. Se as tabelas do núcleo ainda não
-          existem no banco, aguarde a tarefa F4.
+          Não foi possível carregar os dados. Tente de novo em instantes.
         </p>
       </div>
     );
@@ -77,7 +64,7 @@ export default async function PessoasPage() {
                   <td className="py-2 pr-4">{p.cargo ?? "—"}</td>
                   <td className="py-2 pr-4">{p.nivel ?? "—"}</td>
                   <td className="py-2 pr-4">{p.papel}</td>
-                  <td className="py-2 pr-4">{p.situacao ?? "—"}</td>
+                  <td className="py-2 pr-4">{p.situacao}</td>
                 </tr>
               ))}
             </tbody>
@@ -93,7 +80,7 @@ export default async function PessoasPage() {
               .filter((p) => p.squad_id === s.id)
               .map((p) => ({
                 nome: nomePorId.get(p.perfil_id) ?? "—",
-                periodo: `${p.inicio ?? "?"} a ${p.fim ?? "atual"}`,
+                periodo: `${p.inicio} a ${p.fim ?? "atual"}`,
               }));
             return (
               <li key={s.id}>

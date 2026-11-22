@@ -5,7 +5,8 @@ import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { decidirAcesso, type Sessao, type UsuarioAtual } from "./acesso";
-import { ehPapel, type Papel } from "./tipos-simulados";
+import type { Papel } from "@/contracts/core";
+import { ehPapel } from "./papel";
 
 /** Lê a sessão e o perfil. Memorizado por requisição (React `cache`, não é o "use cache"). */
 const obterSessao = cache(async (): Promise<Sessao> => {

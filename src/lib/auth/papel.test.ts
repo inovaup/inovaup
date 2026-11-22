@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ehPapel } from "./tipos-simulados";
+import { ehPapel } from "./papel";
 
 describe("ehPapel", () => {
   it("aceita só os três papéis", () => {

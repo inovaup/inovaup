@@ -1,6 +1,6 @@
 // Itens do menu por papel. O menu só esconde links; quem protege é requireRole()
 // em cada página. Itens de tarefas futuras entram quando a página existir.
-import type { Papel } from "@/lib/auth/tipos-simulados";
+import type { Papel } from "@/contracts/core";
 
 export type ItemMenu = { rotulo: string; href: string; papeis: readonly Papel[] };
 

@@ -1,6 +1,6 @@
 // Regras de acesso PURAS (sem banco nem Next.js), para poderem ser testadas.
 // Quem usa: src/lib/auth/sessao.ts (getCurrentUser e requireRole).
-import type { Papel } from "./tipos-simulados";
+import type { Papel } from "@/contracts/core";
 
 export type UsuarioAtual = {
   id: string;
