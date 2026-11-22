@@ -6,6 +6,8 @@
  * Precisa no .env.local: NEXT_PUBLIC_SUPABASE_URL,
  * NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY e as DEMO_SENHA_* gravadas pela semente.
  * Sem isso, os testes são pulados na máquina local e FALHAM no CI.
+ *
+ * Testes que gravam dados só rodam no CI (D-16: banco de dev compartilhado).
  */
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -167,7 +169,8 @@ describe.skipIf(!configurado)("RLS do núcleo (F4)", { timeout: 30_000 }, () => 
       expect(data).toBe(false);
     });
 
-    it("não vira GP escrevendo papel no próprio user_metadata", async () => {
+    // Grava (e desfaz) dados: pela D-16, só roda no CI, nunca no banco de dev compartilhado.
+    it.runIf(Boolean(process.env.CI))("não vira GP escrevendo papel no próprio user_metadata", async () => {
       // O Supabase deixa qualquer usuário editar o próprio user_metadata.
       // Por isso o papel vem só de perfis.papel: isto não pode dar acesso de GP.
       const { error: erroMetadata } = await colaborador.auth.updateUser({ data: { papel: "gp" } });

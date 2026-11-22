@@ -1,0 +1,23 @@
+#!/bin/sh
+# Hook de pre-push do InovaUp (F6): bloqueia push direto para a main (D-06).
+# A main só muda por pull request revisado.
+#
+# Ative uma vez em cada computador, na pasta do repositório:
+#   git config core.hooksPath .githooks
+#
+# O Git envia, pela entrada padrão, uma linha por referência enviada:
+#   <ref local> <sha local> <ref remota> <sha remoto>
+
+protegida="refs/heads/main"
+
+while read -r ref_local sha_local ref_remota sha_remoto; do
+  if [ "$ref_remota" = "$protegida" ]; then
+    echo "" >&2
+    echo "Push para a main bloqueado pelo hook do InovaUp." >&2
+    echo "Envie a sua branch (git push origin <sua-branch>) e abra um pull request." >&2
+    echo "" >&2
+    exit 1
+  fi
+done
+
+exit 0
