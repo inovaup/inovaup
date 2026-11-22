@@ -1,0 +1,92 @@
+# CI do InovaUp (F6): roda em todo PR para a main e em todo push na main.
+#
+# Usa um Supabase LOCAL e temporário, criado aqui dentro do GitHub Actions:
+# aplica as migrações, roda a semente e os testes de RLS, e descarta tudo no fim.
+# Não usa o banco de dev compartilhado nem nenhum segredo do repositório.
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Typecheck, lint e testes (com Supabase local)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v5
+
+      - name: Instalar o Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Instalar a Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: 3.2.0
+
+      # Sobe só o necessário (banco, login e API); as migrações entram sozinhas.
+      - name: Subir o Supabase local
+        run: >
+          supabase start
+          -x studio,imgproxy,storage-api,realtime,edge-runtime,logflare,vector,supavisor,mailpit
+
+      - name: Verificação SQL da RLS do núcleo
+        run: |
+          supabase db query -f supabase/verificacoes/nucleo_rls.sql | tee verificacao.txt
+          grep -q "OK: todas as verificações da RLS do núcleo passaram" verificacao.txt
+
+      # As chaves do Supabase local são as padrão de desenvolvimento (não são segredo).
+      # Os nomes das variáveis seguem o .env.example.
+      - name: Montar o .env.local do CI
+        run: |
+          supabase status -o json > status.json
+          node -e '
+            const s = JSON.parse(require("fs").readFileSync("status.json", "utf8"));
+            const url = s.API_URL;
+            const publica = s.PUBLISHABLE_KEY || s.ANON_KEY;
+            const secreta = s.SECRET_KEY || s.SERVICE_ROLE_KEY;
+            if (!url || !publica || !secreta) {
+              console.error("Campos do supabase status:", Object.keys(s).join(", "));
+              process.exit(1);
+            }
+            require("fs").writeFileSync(".env.local", [
+              "NEXT_PUBLIC_SUPABASE_URL=" + url,
+              "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=" + publica,
+              "SUPABASE_SERVICE_ROLE_KEY=" + secreta,
+              "",
+            ].join("\n"));
+            console.log(".env.local criado para", url);
+          '
+          rm status.json
+
+      - name: Semente do núcleo
+        run: npm run seed
+
+      # Com CI=true (padrão do GitHub Actions), os testes de RLS FALHAM se faltar
+      # configuração, em vez de serem pulados.
+      - name: Testes (Vitest, incluindo RLS)
+        run: npm test
