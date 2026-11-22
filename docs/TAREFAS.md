@@ -10,7 +10,7 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 
 | ID | Tarefa | Resp. | Revisor | P50 / P80 | Janela | Status |
 |---|---|---|---|---|---|---|
-| F1 | Ambiente Windows e repositório | Davi / Daniel | — | 2 / 3 · 1,5 / 2,5 | 21/11 | [ ] |
+| F1 | Ambiente Windows e repositório | Davi / Daniel | — | 2 / 3 · 1,5 / 2,5 | 21/11 | [x] |
 | F8 | Aprendizado dirigido | Davi / Daniel | — | 1,5 / 2,5 cada | 21–22/11 | [ ] |
 | F2 | Projeto base Next.js + Supabase | Daniel | Davi | 2,5 / 4 | 22/11 | [x] |
 | F7 | Completar o CLAUDE.md e template de PR | Daniel | Davi | 1 / 2 | 22/11 | [x] |
