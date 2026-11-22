@@ -1,19 +1,20 @@
 import { LogoutButton } from "@/components/logout-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { getCurrentUser } from "@/lib/auth/sessao";
+import { PAPEIS } from "@/contracts/core";
+import { requireRole } from "@/lib/auth/sessao";
 import { itensDoMenu } from "@/lib/navegacao";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
-// Área autenticada. Este layout só monta o menu: a proteção de verdade é o
+// Área autenticada. Este layout monta o menu e segue a mesma regra das páginas:
+// sem sessão vai para o login; logado sem perfil vai para /acesso-negado (fora
+// desta área, então não há vai e volta). A proteção de verdade continua sendo o
 // requireRole() de cada página (layouts não rodam de novo a cada navegação).
 export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const usuario = await getCurrentUser();
-  if (!usuario) redirect("/auth/login");
+  const usuario = await requireRole(...PAPEIS);
 
   return (
     <div className="min-h-screen flex flex-col">

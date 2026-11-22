@@ -25,6 +25,14 @@ describe("rotas", () => {
     for (const p of lista) expect(readFileSync(p, "utf8"), p).toContain("requireRole(");
   });
 
+  it("o layout da área autenticada usa requireRole() com todos os papéis", () => {
+    // Quem está logado sem perfil vai para /acesso-negado, como nas páginas,
+    // em vez de voltar para o login sem explicação.
+    const fonte = readFileSync(path.join(APP, "(app)", "layout.tsx"), "utf8");
+    expect(fonte).toContain("requireRole(...PAPEIS)");
+    expect(fonte).not.toContain("getCurrentUser");
+  });
+
   it("Pessoas e squads é só da GP", () => {
     const fonte = readFileSync(path.join(APP, "(app)", "pessoas", "page.tsx"), "utf8");
     expect(fonte).toContain('requireRole("gp")');
