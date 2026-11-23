@@ -7,6 +7,7 @@ export type ItemMenu = { rotulo: string; href: string; papeis: readonly Papel[] 
 export const ITENS_MENU: readonly ItemMenu[] = [
   { rotulo: "Início", href: "/inicio", papeis: ["colaborador", "lider", "gp"] },
   { rotulo: "Avaliações", href: "/avaliacoes", papeis: ["colaborador", "lider", "gp"] },
+  { rotulo: "Painel da GP", href: "/painel", papeis: ["gp"] },
   { rotulo: "Pessoas e squads", href: "/pessoas", papeis: ["gp"] },
 ];
 
