@@ -33,6 +33,11 @@ describe("rotas", () => {
     expect(fonte).not.toContain("getCurrentUser");
   });
 
+  it("Painel da GP é só da GP", () => {
+    const fonte = readFileSync(path.join(APP, "(app)", "painel", "page.tsx"), "utf8");
+    expect(fonte).toContain('requireRole("gp")');
+  });
+
   it("Pessoas e squads é só da GP", () => {
     const fonte = readFileSync(path.join(APP, "(app)", "pessoas", "page.tsx"), "utf8");
     expect(fonte).toContain('requireRole("gp")');
