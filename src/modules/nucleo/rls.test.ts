@@ -24,8 +24,10 @@ const chavePublica = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "";
 const pessoas = Object.fromEntries(dados.pessoas.map((p) => [p.chave, p]));
 const senhaDe = (chave: string): string => process.env[`DEMO_SENHA_${chave}`] ?? "";
 
+// Só as contas em que estes testes entram; as outras pessoas da semente não precisam de senha aqui.
+const CONTAS_USADAS = ["GP", "LIDER", "COLABORADOR1"];
 const configurado =
-  url !== "" && chavePublica !== "" && dados.pessoas.every((p) => senhaDe(p.chave) !== "");
+  url !== "" && chavePublica !== "" && CONTAS_USADAS.every((c) => senhaDe(c) !== "");
 
 if (!configurado) {
   const aviso =
@@ -212,22 +214,28 @@ describe.skipIf(!configurado)("RLS do núcleo (F4)", { timeout: 30_000 }, () => 
   });
 
   describe("GP", () => {
-    it("lê todos os perfis", async () => {
+    // Conferem a regra de acesso (a GP lê o que é dos outros), sem depender de o
+    // banco já ter todas as pessoas da semente; os dados completos são conferidos
+    // em src/modules/avaliacao/dados/semente.test.ts e pela semente no CI.
+    it("lê os perfis das outras pessoas", async () => {
       const { data, error } = await gp.from("perfis").select("email");
       expect(error).toBeNull();
       const emails = (data ?? []).map((p) => p.email);
-      for (const pessoa of dados.pessoas) expect(emails).toContain(pessoa.email);
+      for (const chave of ["GP", "LIDER", "COLABORADOR1", "COLABORADOR2"]) {
+        expect(emails).toContain(pessoas[chave].email);
+      }
     });
 
-    it("lê todos os squads e participações", async () => {
+    it("lê os squads e as participações das outras pessoas", async () => {
       const squads = await gp.from("squads").select("nome");
       expect(squads.error).toBeNull();
       const nomes = (squads.data ?? []).map((s) => s.nome);
       for (const nome of dados.squads) expect(nomes).toContain(nome);
 
-      const participacoes = await gp.from("participacoes_squad").select("id");
+      const participacoes = await gp.from("participacoes_squad").select("perfil_id");
       expect(participacoes.error).toBeNull();
-      expect((participacoes.data ?? []).length).toBeGreaterThanOrEqual(dados.participacoes.length);
+      const donos = new Set((participacoes.data ?? []).map((p) => p.perfil_id));
+      expect(donos.size).toBeGreaterThan(1);
     });
 
     it("eh_gp() é true", async () => {
