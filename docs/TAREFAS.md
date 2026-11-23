@@ -14,7 +14,7 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | F8 | Aprendizado dirigido | Davi / Daniel | — | 1,5 / 2,5 cada | 21–22/11 | [x] |
 | F2 | Projeto base Next.js + Supabase | Daniel | Davi | 2,5 / 4 | 22/11 | [x] |
 | F7 | Completar o CLAUDE.md e template de PR | Daniel | Davi | 1 / 2 | 22/11 | [x] |
-| F3 | Projetos Supabase (dev e demo) | Davi / Daniel | — | 0,5 / 1 · 1 / 2 | 22/11 | [ ] |
+| F3 | Projetos Supabase (dev e demo) | Davi / Daniel | — | 0,5 / 1 · 1 / 2 | 22/11 | [x] |
 | F4 | Núcleo, RLS e semente (I1) | Davi | Daniel | 4 / 6 | 22–23/11 | [x] |
 | F6 | CI e hook de pre-push | Davi | Daniel | 3 / 5 | 23–24/11 | [x] |
 | F5 | Login, sessão, papéis, menu e listagem (I2) | Daniel | Davi | 4 / 6 | 23–25/11 | [x] |
@@ -25,8 +25,8 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | A8 | Painel da GP reduzido | Daniel | Davi | 1 / 2 | 28–29/11 | [x] |
 | **G2** | **Portão: modelo e resposta gravando, RLS testado** | — | — | — | 28/11 | [x] |
 | A6 | Fórmula provisória e execução do cálculo (I4) | Davi | Daniel | 4,5 / 6,5 | 28–30/11 | [x] |
-| A7 | Supressão e relatório reduzido | Daniel | Davi | 4 / 6 | 30/11–1/12 | [ ] |
-| **G3** | **Portão: cálculo e relatório** | — | — | — | 1/12 | [ ] |
+| A7 | Supressão e relatório reduzido | Daniel | Davi | 4 / 6 | 30/11–1/12 | [x] |
+| **G3** | **Portão: cálculo e relatório** | — | — | — | 1/12 | [x] |
 | Q1 | Lacunas de permissão | Davi | Daniel | 1,5 / 2,5 | 1–2/12 | [ ] |
 | Q2 | Revisão de segurança e correções; congelamento às 12h | Daniel / Davi | — | 2 / 3 · 1,5 / 3 | 2/12 | [ ] |
 | Q3 | Demo: migrações e semente no projeto demo, roteiro, ensaio | Daniel | Davi | 2 / 3 | 3/12 | [ ] |

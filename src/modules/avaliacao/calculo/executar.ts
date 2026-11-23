@@ -19,7 +19,7 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { requireRole } from "@/lib/auth/sessao";
 import { executarCiclo } from "./executar-ciclo";
-import { montarRelatorioProvisorio } from "./relatorio-provisorio";
+import { montarRelatorioPublicavel } from "@/modules/avaliacao/relatorio/supressao";
 
 export async function executarCalculo(cicloId: string): Promise<{ avaliados: number }> {
   await requireRole("gp");
@@ -33,5 +33,5 @@ export async function executarCalculo(cicloId: string): Promise<{ avaliados: num
   const admin = createClient(url, chave, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
-  return executarCiclo(admin, cicloId, montarRelatorioProvisorio);
+  return executarCiclo(admin, cicloId, montarRelatorioPublicavel);
 }
