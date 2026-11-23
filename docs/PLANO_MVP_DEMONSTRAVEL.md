@@ -124,3 +124,10 @@ Premissa: 4 h/dia, com pausa em 24–25/12 e 31/12–1/1.
 - Criado em 20/11/2026 com `git init` e **sem commit**. Na tarefa F1, o Daniel cria o repositório privado no GitHub, faz o primeiro commit e o push e convida o Davi.
 - Conteúdo: `CLAUDE.md`, `.gitignore`, `.gitattributes`, `docs/` (este plano, tarefas, decisões, regras e referências sem dados pessoais).
 - Ainda não há código: o projeto Next.js é criado na tarefa F2.
+
+## 10. Lista "depois de 4/12"
+
+Pedidos e pendências que ficam fora do MVP demonstrável (regra do `CLAUDE.md`: pedido novo vem para cá).
+
+- **Testes de navegador das páginas** (abrir cada tela com cada papel). Exigem subir o Next.js no CI. Até 4/12, as páginas ficam cobertas pela checagem de `requireRole()` no código e pelos testes da sessão. Origem: plano da Q1, combinado com o Daniel em 23/11.
+- **Contador do painel da GP:** lê as atribuições numa consulta só, e o Supabase devolve no máximo 1.000 linhas por consulta; contar por ciclo. Origem: revisão da A8.
