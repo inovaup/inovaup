@@ -39,6 +39,106 @@
       "nivel": null,
       "papel": "colaborador",
       "situacao": "trainee"
+    },
+    {
+      "chave": "DIRETORA",
+      "nome": "Diretora Demo",
+      "email": "diretora@demo.inovaup.test",
+      "area": "Projetos",
+      "cargo": "Diretor(a) de Projetos",
+      "nivel": null,
+      "papel": "lider",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "DIRETOR",
+      "nome": "Diretor Demo",
+      "email": "diretor@demo.inovaup.test",
+      "area": "Operações",
+      "cargo": "Diretor(a) de Operações",
+      "nivel": null,
+      "papel": "lider",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "GERENTE1",
+      "nome": "Gerente Demo Um",
+      "email": "gerente1@demo.inovaup.test",
+      "area": "Projetos",
+      "cargo": "Gerente de Projetos",
+      "nivel": null,
+      "papel": "lider",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "GERENTE2",
+      "nome": "Gerente Demo Dois",
+      "email": "gerente2@demo.inovaup.test",
+      "area": "Mercado",
+      "cargo": "Gerente Comercial",
+      "nivel": null,
+      "papel": "lider",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "CONSULTOR3",
+      "nome": "Consultor Demo Três",
+      "email": "consultor3@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "CONSULTOR4",
+      "nome": "Consultora Demo Quatro",
+      "email": "consultor4@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "CONSULTOR5",
+      "nome": "Consultor Demo Cinco",
+      "email": "consultor5@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "CONSULTOR6",
+      "nome": "Consultora Demo Seis",
+      "email": "consultor6@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "CONSULTOR7",
+      "nome": "Consultor Demo Sete",
+      "email": "consultor7@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "ativa"
+    },
+    {
+      "chave": "TRAINEE8",
+      "nome": "Trainee Demo Oito",
+      "email": "trainee8@demo.inovaup.test",
+      "area": "Consultoria",
+      "cargo": "Consultor",
+      "nivel": null,
+      "papel": "colaborador",
+      "situacao": "trainee"
     }
   ],
   "squads": ["Squad Demo Alfa", "Squad Demo Beta"],
@@ -46,6 +146,10 @@
     { "pessoa": "LIDER", "squad": "Squad Demo Alfa", "inicio": "2026-03-01", "fim": null },
     { "pessoa": "COLABORADOR1", "squad": "Squad Demo Alfa", "inicio": "2026-03-01", "fim": "2026-07-31" },
     { "pessoa": "COLABORADOR1", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null },
-    { "pessoa": "COLABORADOR2", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null }
+    { "pessoa": "COLABORADOR2", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null },
+    { "pessoa": "CONSULTOR3", "squad": "Squad Demo Alfa", "inicio": "2026-03-01", "fim": null },
+    { "pessoa": "CONSULTOR4", "squad": "Squad Demo Alfa", "inicio": "2026-03-01", "fim": null },
+    { "pessoa": "CONSULTOR5", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null },
+    { "pessoa": "CONSULTOR6", "squad": "Squad Demo Beta", "inicio": "2026-08-01", "fim": null }
   ]
 }
