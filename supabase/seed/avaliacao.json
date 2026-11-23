@@ -1,0 +1,80 @@
+{
+  "ciclo": {
+    "nome": "Avaliação de desempenho — demonstração",
+    "status": "aberto"
+  },
+  "pesos_grupo": { "autoavaliacao": 1, "gestor": 2, "pares": 2, "liderados": 2 },
+  "secoes": [
+    {
+      "nome": "Performance",
+      "escala_min": 1,
+      "escala_max": 10,
+      "permite_na": true,
+      "peso": 1,
+      "competencias": [
+        "Cumpre prazos",
+        "Preza pela organização",
+        "Faz entregas de qualidade",
+        "Gestão de projetos",
+        "Liderança"
+      ]
+    },
+    {
+      "nome": "Comportamental",
+      "escala_min": 1,
+      "escala_max": 10,
+      "permite_na": false,
+      "peso": 1,
+      "competencias": [
+        "Apoio e reconhecimento por parte das lideranças",
+        "Direcionamentos das lideranças"
+      ]
+    }
+  ],
+  "_respostas": "Cada lista segue a ordem das 7 competências acima (5 de Performance e 2 de Comportamental). \"NA\" = não se aplica (só em Performance).",
+  "atribuicoes": [
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "LIDER", "grupo": "autoavaliacao",
+      "respostas": [8, 8, 9, 8, 8, 9, 8],
+      "comentarios": { "Performance": "Quero melhorar a gestão do meu tempo." } },
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "DIRETORA", "grupo": "gestor",
+      "respostas": [9, 8, 9, 9, "NA", 9, 9],
+      "comentarios": { "Performance": "Entregas consistentes e bem organizadas." } },
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "DIRETOR", "grupo": "gestor",
+      "respostas": [8, 9, 8, 8, "NA", 8, 9],
+      "comentarios": { "Comportamental": "Dá bons direcionamentos ao time." } },
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "GERENTE1", "grupo": "pares",
+      "respostas": [7, 8, 8, 7, "NA", 8, 7] },
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "GERENTE2", "grupo": "pares",
+      "respostas": [8, 7, 9, 8, "NA", 7, 8],
+      "comentarios": { "Performance": "Poderia delegar mais tarefas." } },
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "CONSULTOR3", "grupo": "liderados",
+      "respostas": [9, 9, 8, 9, 9, 9, 9] },
+    { "caso": "A", "avaliado": "LIDER", "avaliador": "CONSULTOR4", "grupo": "liderados",
+      "respostas": [8, 8, 8, 9, "NA", 9, 8] },
+
+    { "caso": "B", "avaliado": "COLABORADOR1", "avaliador": "COLABORADOR1", "grupo": "autoavaliacao",
+      "respostas": [7, 8, 7, "NA", "NA", 8, 7],
+      "comentarios": { "Performance": "Estou aprendendo a organizar as entregas." } },
+    { "caso": "B", "avaliado": "COLABORADOR1", "avaliador": "LIDER", "grupo": "gestor",
+      "respostas": [8, 7, 8, "NA", "NA", 8, 8],
+      "comentarios": { "Performance": "Cumpre bem os prazos combinados." } },
+    { "caso": "B", "avaliado": "COLABORADOR1", "avaliador": "CONSULTOR5", "grupo": "pares",
+      "respostas": [7, 7, 8, "NA", "NA", 7, 8] },
+    { "caso": "B", "avaliado": "COLABORADOR1", "avaliador": "CONSULTOR6", "grupo": "pares",
+      "respostas": [8, 8, 7, "NA", "NA", 8, 7] },
+
+    { "caso": "C", "avaliado": "COLABORADOR2", "avaliador": "COLABORADOR2", "grupo": "autoavaliacao",
+      "respostas": [8, 9, 8, "NA", "NA", 9, 8] },
+    { "caso": "C", "avaliado": "COLABORADOR2", "avaliador": "TRAINEE8", "grupo": "pares",
+      "respostas": [7, 8, 8, "NA", "NA", 8, 7] },
+
+    { "caso": "DEMO", "avaliado": "CONSULTOR3", "avaliador": "CONSULTOR3", "grupo": "autoavaliacao",
+      "respostas": [8, 8, 8, 7, "NA", 8, 8] },
+    { "caso": "DEMO", "avaliado": "CONSULTOR3", "avaliador": "CONSULTOR7", "grupo": "pares",
+      "respostas": [7, 8, 8, 7, "NA", 8, 8] },
+    { "caso": "DEMO", "avaliado": "CONSULTOR3", "avaliador": "COLABORADOR1", "grupo": "pares",
+      "pendente": true },
+    { "caso": "DEMO", "avaliado": "CONSULTOR3", "avaliador": "LIDER", "grupo": "gestor",
+      "pendente": true }
+  ]
+}

@@ -20,11 +20,11 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | F5 | Login, sessão, papéis, menu e listagem (I2) | Daniel | Davi | 4 / 6 | 23–25/11 | [x] |
 | **G1** | **Portão: núcleo, login e CI verdes** | — | — | — | 24/11 | [x] |
 | A1 | Modelo da avaliação (I3) | Davi | Daniel | 5 / 7,5 | 25–27/11 | [x] |
-| A2 | Semente do ciclo de demonstração | Davi | Daniel | 2 / 3 | 27/11 | [ ] |
-| A5 | Pendências e tela de resposta | Daniel | Davi | 4 / 6,5 | 26–28/11 | [ ] |
-| A8 | Painel da GP reduzido | Daniel | Davi | 1 / 2 | 28–29/11 | [ ] |
-| **G2** | **Portão: modelo e resposta gravando, RLS testado** | — | — | — | 28/11 | [ ] |
-| A6 | Fórmula provisória e execução do cálculo (I4) | Davi | Daniel | 4,5 / 6,5 | 28–30/11 | [ ] |
+| A2 | Semente do ciclo de demonstração | Davi | Daniel | 2 / 3 | 27/11 | [x] |
+| A5 | Pendências e tela de resposta | Daniel | Davi | 4 / 6,5 | 26–28/11 | [x] |
+| A8 | Painel da GP reduzido | Daniel | Davi | 1 / 2 | 28–29/11 | [x] |
+| **G2** | **Portão: modelo e resposta gravando, RLS testado** | — | — | — | 28/11 | [x] |
+| A6 | Fórmula provisória e execução do cálculo (I4) | Davi | Daniel | 4,5 / 6,5 | 28–30/11 | [x] |
 | A7 | Supressão e relatório reduzido | Daniel | Davi | 4 / 6 | 30/11–1/12 | [ ] |
 | **G3** | **Portão: cálculo e relatório** | — | — | — | 1/12 | [ ] |
 | Q1 | Lacunas de permissão | Davi | Daniel | 1,5 / 2,5 | 1–2/12 | [ ] |
