@@ -658,7 +658,7 @@ reset role;
 -- 10) Relatórios: gravados pela service_role (aqui, o dono) e liberados pela GP
 insert into public.relatorios (ciclo_id, avaliado_id, conteudo) values
   ('a1000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000000003',
-   '{"disponivel": false, "aviso": "verificação", "autoavaliacao_pct": null}');
+   '{"versao": 1, "disponivel": false, "aviso": "verificação", "autoavaliacao_pct": null}');
 
 -- Antes da liberação, o avaliado não lê.
 select set_config('request.jwt.claims',

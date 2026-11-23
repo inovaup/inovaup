@@ -202,11 +202,22 @@ export interface ResultadoCompleto {
 
 // --- Relatório publicável (A7) ------------------------------------------------
 
+/** Versão do formato de `RelatorioPublicavel` gravado em `relatorios.conteudo`. */
+export const VERSAO_RELATORIO = 1;
+
+/** Uma competência no relatório publicável (já com o texto, sem outra consulta). */
+export interface CompetenciaPublicavel {
+  competencia_id: string;
+  secao_nome: string;
+  pergunta: string;
+  /** R3: `null` = "indisponível" para aquela competência. */
+  pct: number | null;
+}
+
 /**
  * Conteúdo gravado em `relatorios.conteudo`, já com a supressão (R1 a R7).
- *
- * VERSÃO PROVISÓRIA: o Daniel ajusta este tipo no PR da A1 (é a saída de
- * `montarRelatorioPublicavel()`, A7).
+ * É a saída de `montarRelatorioPublicavel()` (A7), formato combinado com o
+ * Daniel na revisão da A1 (versão 1).
  *
  * Atenção: o avaliado lê esta linha inteira pela API. Por isso aqui NÃO entram
  * contagens por grupo (R7: o avaliado não vê contagens; a GP as obtém pelas
@@ -214,17 +225,19 @@ export interface ResultadoCompleto {
  */
 export type RelatorioPublicavel =
   | {
+      versao: typeof VERSAO_RELATORIO;
       /** R1: menos de 2 avaliadores além da própria pessoa. */
       disponivel: false;
       aviso: string;
       autoavaliacao_pct: number | null;
     }
   | {
+      versao: typeof VERSAO_RELATORIO;
       disponivel: true;
       /** R2. */
       nota_final_pct: number;
-      /** R3: `pct` nulo = "indisponível" para aquela competência. */
-      competencias: { competencia_id: string; pct: number | null }[];
+      /** R3. */
+      competencias: CompetenciaPublicavel[];
       /** R4: `null` quando os grupos não podem aparecer separados. */
       grupos: { grupo: GrupoOutros; pct: number }[] | null;
       /** R4: "Outros avaliadores (combinado)", usado quando `grupos` é `null`. */
