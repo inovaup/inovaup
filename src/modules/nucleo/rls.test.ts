@@ -21,6 +21,11 @@ if (existsSync(caminhoEnv)) process.loadEnvFile(caminhoEnv);
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const chavePublica = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "";
+
+// Com CI ligado, o teste do user_metadata grava: só no Supabase local, nunca no dev compartilhado.
+if (process.env.CI && !/^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?(\/|$)/.test(url)) {
+  throw new Error("Com CI ligado, estes testes gravam: só rodam contra o Supabase local (127.0.0.1).");
+}
 const pessoas = Object.fromEntries(dados.pessoas.map((p) => [p.chave, p]));
 const senhaDe = (chave: string): string => process.env[`DEMO_SENHA_${chave}`] ?? "";
 
