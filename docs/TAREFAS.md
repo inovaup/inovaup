@@ -19,7 +19,7 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | F6 | CI e hook de pre-push | Davi | Daniel | 3 / 5 | 23–24/11 | [x] |
 | F5 | Login, sessão, papéis, menu e listagem (I2) | Daniel | Davi | 4 / 6 | 23–25/11 | [x] |
 | **G1** | **Portão: núcleo, login e CI verdes** | — | — | — | 24/11 | [x] |
-| A1 | Modelo da avaliação (I3) | Davi | Daniel | 5 / 7,5 | 25–27/11 | [ ] |
+| A1 | Modelo da avaliação (I3) | Davi | Daniel | 5 / 7,5 | 25–27/11 | [x] |
 | A2 | Semente do ciclo de demonstração | Davi | Daniel | 2 / 3 | 27/11 | [ ] |
 | A5 | Pendências e tela de resposta | Daniel | Davi | 4 / 6,5 | 26–28/11 | [ ] |
 | A8 | Painel da GP reduzido | Daniel | Davi | 1 / 2 | 28–29/11 | [ ] |
