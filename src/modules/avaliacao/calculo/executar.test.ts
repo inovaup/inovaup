@@ -13,7 +13,7 @@ vi.mock("./executar-ciclo", () => ({ executarCiclo: vi.fn(async () => ({ avaliad
 const { requireRole } = await import("@/lib/auth/sessao");
 const { createClient } = await import("@supabase/supabase-js");
 const { executarCiclo } = await import("./executar-ciclo");
-const { montarRelatorioProvisorio } = await import("./relatorio-provisorio");
+const { montarRelatorioPublicavel } = await import("@/modules/avaliacao/relatorio/supressao");
 const { executarCalculo } = await import("./executar");
 
 describe("executarCalculo (I4)", () => {
@@ -40,7 +40,7 @@ describe("executarCalculo (I4)", () => {
     expect(createClient).not.toHaveBeenCalled();
   });
 
-  it("depois do portão, executa o ciclo com o stub da A7 e devolve o número de avaliados", async () => {
+  it("depois do portão, executa o ciclo com a supressão da A7 e devolve o número de avaliados", async () => {
     // Valor falso, só para o teste: a chave real nunca é lida aqui.
     vi.stubEnv("SUPABASE_SERVICE_ROLE_KEY", "chave-falsa-de-teste");
 
@@ -48,6 +48,6 @@ describe("executarCalculo (I4)", () => {
     expect(vi.mocked(requireRole).mock.invocationCallOrder[0]).toBeLessThan(
       vi.mocked(createClient).mock.invocationCallOrder[0],
     );
-    expect(executarCiclo).toHaveBeenCalledWith({ falso: true }, "ciclo-1", montarRelatorioProvisorio);
+    expect(executarCiclo).toHaveBeenCalledWith({ falso: true }, "ciclo-1", montarRelatorioPublicavel);
   });
 });

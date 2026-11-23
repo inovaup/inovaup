@@ -6,7 +6,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { describe, expect, it, vi } from "vitest";
 import type { RelatorioPublicavel, ResultadoCompleto } from "@/contracts/avaliacao";
 import { executarCiclo, type MontarRelatorio, type QuestionarioDoCiclo } from "./executar-ciclo";
-import { AVISO_PROVISORIO, montarRelatorioProvisorio } from "./relatorio-provisorio";
+import { montarRelatorioPublicavel } from "@/modules/avaliacao/relatorio/supressao";
 
 type Linha = Record<string, unknown>;
 type Tabelas = Record<string, Linha[]>;
@@ -148,12 +148,12 @@ function cicloDeTeste(status = "encerrado", relatorios_liberados = false): Tabel
   };
 }
 
-/** Guarda o que a função de montar recebeu e devolve o stub. */
+/** Guarda o que a função de montar recebeu e devolve o relatório da A7. */
 function montarEspiao() {
   const chamadas: { resultado: ResultadoCompleto; questionario: QuestionarioDoCiclo }[] = [];
   const montar: MontarRelatorio = (resultado, questionario) => {
     chamadas.push({ resultado, questionario });
-    return montarRelatorioProvisorio();
+    return montarRelatorioPublicavel(resultado, questionario);
   };
   const de = (avaliado: string) => chamadas.find((c) => c.resultado.avaliado_id === avaliado)!;
   return { montar, chamadas, de };
@@ -176,17 +176,15 @@ describe("executarCiclo (A6, I4)", () => {
   it("grava só o relatório publicável: nenhuma nota individual nem o resultado completo", async () => {
     const { cliente, gravacoes } = clienteFalso(cicloDeTeste());
 
-    await executarCiclo(cliente, "ciclo-1", montarRelatorioProvisorio);
+    await executarCiclo(cliente, "ciclo-1", montarRelatorioPublicavel);
 
     for (const linha of gravacoes[0].linhas) {
       expect(Object.keys(linha).sort()).toEqual(["avaliado_id", "ciclo_id", "conteudo", "gerado_em"]);
       expect(linha.ciclo_id).toBe("ciclo-1");
-      expect(linha.conteudo).toEqual({
-        versao: 1,
-        disponivel: false,
-        aviso: AVISO_PROVISORIO,
-        autoavaliacao_pct: null,
-      } satisfies RelatorioPublicavel);
+      const conteudo = linha.conteudo as RelatorioPublicavel;
+      expect(conteudo.versao).toBe(1);
+      // R7: nada de contagens nem de ids de avaliador ou atribuição no que é gravado.
+      expect(JSON.stringify(conteudo)).not.toMatch(/"n"|n_avaliadores|n_comentaristas|avaliador_id|atribuicao/);
     }
   });
 
@@ -233,8 +231,8 @@ describe("executarCiclo (A6, I4)", () => {
   it("pode rodar de novo enquanto os relatórios não forem liberados", async () => {
     const { cliente, gravacoes } = clienteFalso(cicloDeTeste());
 
-    await executarCiclo(cliente, "ciclo-1", montarRelatorioProvisorio);
-    await executarCiclo(cliente, "ciclo-1", montarRelatorioProvisorio);
+    await executarCiclo(cliente, "ciclo-1", montarRelatorioPublicavel);
+    await executarCiclo(cliente, "ciclo-1", montarRelatorioPublicavel);
 
     expect(gravacoes).toHaveLength(2);
     expect(gravacoes[1].opcoes).toEqual({ onConflict: "ciclo_id,avaliado_id" });
@@ -246,7 +244,7 @@ describe("executarCiclo (A6, I4)", () => {
     ["encerrado", true, "já foram liberados"],
   ])("recusa ciclo %s (liberado: %s) sem gravar nada", async (status, liberado, mensagem) => {
     const { cliente, gravacoes } = clienteFalso(cicloDeTeste(status, liberado));
-    const montar = vi.fn(montarRelatorioProvisorio);
+    const montar = vi.fn(montarRelatorioPublicavel);
 
     await expect(executarCiclo(cliente, "ciclo-1", montar)).rejects.toThrow(mensagem);
     expect(montar).not.toHaveBeenCalled();
@@ -255,7 +253,7 @@ describe("executarCiclo (A6, I4)", () => {
 
   it("recusa ciclo que não existe", async () => {
     const { cliente, gravacoes } = clienteFalso(cicloDeTeste());
-    await expect(executarCiclo(cliente, "nao-existe", montarRelatorioProvisorio)).rejects.toThrow(
+    await expect(executarCiclo(cliente, "nao-existe", montarRelatorioPublicavel)).rejects.toThrow(
       "Ciclo não encontrado",
     );
     expect(gravacoes).toEqual([]);
@@ -263,7 +261,7 @@ describe("executarCiclo (A6, I4)", () => {
 
   it("avisa quando a gravação falha", async () => {
     const { cliente } = clienteFalso(cicloDeTeste(), { erroAoGravar: "sem conexão" });
-    await expect(executarCiclo(cliente, "ciclo-1", montarRelatorioProvisorio)).rejects.toThrow(
+    await expect(executarCiclo(cliente, "ciclo-1", montarRelatorioPublicavel)).rejects.toThrow(
       "Falha ao gravar os relatórios: sem conexão",
     );
   });

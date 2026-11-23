@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { StatusCiclo } from "@/contracts/avaliacao";
 import { requireRole } from "@/lib/auth/sessao";
 import { AcoesDoCiclo } from "@/modules/avaliacao/painel/acoes-do-ciclo";
@@ -41,6 +42,11 @@ export default async function PainelPage() {
               avaliações respondidas
             </p>
             <AcoesDoCiclo cicloId={c.id} status={c.status} liberados={c.relatorios_liberados} />
+            {c.status === "encerrado" && (
+              <Link href={`/painel/relatorios/${c.id}`} className="self-start text-sm underline">
+                Ver relatórios do ciclo
+              </Link>
+            )}
           </section>
         ))
       )}

@@ -33,9 +33,15 @@ describe("rotas", () => {
     expect(fonte).not.toContain("getCurrentUser");
   });
 
-  it("Painel da GP é só da GP", () => {
-    const fonte = readFileSync(path.join(APP, "(app)", "painel", "page.tsx"), "utf8");
-    expect(fonte).toContain('requireRole("gp")');
+  it("Painel da GP e os relatórios de outras pessoas são só da GP", () => {
+    for (const p of paginas(path.join(APP, "(app)", "painel"))) {
+      expect(readFileSync(p, "utf8"), p).toContain('requireRole("gp")');
+    }
+  });
+
+  it("Meu relatório lê só o relatório da própria pessoa", () => {
+    const fonte = readFileSync(path.join(APP, "(app)", "relatorio", "page.tsx"), "utf8");
+    expect(fonte).toContain("listarMeusRelatorios(usuario.id)");
   });
 
   it("Pessoas e squads é só da GP", () => {

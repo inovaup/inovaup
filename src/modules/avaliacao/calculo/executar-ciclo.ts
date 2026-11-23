@@ -26,15 +26,13 @@ import type {
   ResultadoCompleto,
   Secao,
 } from "@/contracts/avaliacao";
+import type { QuestionarioDoCiclo } from "@/modules/avaliacao/relatorio/supressao";
 import { calcularResultado } from "./calcular";
 
-/** O texto do questionário que o relatório usa (mesmo formato da A7). */
-export type QuestionarioDoCiclo = {
-  secoes: Pick<Secao, "id" | "nome" | "ordem">[];
-  competencias: Pick<Competencia, "id" | "secao_id" | "pergunta" | "ordem">[];
-};
+/** O texto do questionário que o relatório usa (definido na A7, um só tipo). */
+export type { QuestionarioDoCiclo };
 
-/** A função da A7 (montarRelatorioPublicavel) ou, até ela chegar, o stub. */
+/** A função da A7 (montarRelatorioPublicavel); nos testes, qualquer função com a mesma assinatura. */
 export type MontarRelatorio = (
   resultado: ResultadoCompleto,
   questionario: QuestionarioDoCiclo,
