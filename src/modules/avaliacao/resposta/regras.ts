@@ -1,13 +1,14 @@
 // Regras puras da tela de resposta (A5). Espelham o que o banco confere na A1
 // (o banco continua sendo a última palavra): valor dentro da escala, N/A só se a
 // seção permitir, nunca valor e N/A juntos, comentário de até 2.000 caracteres.
+import { LIMITE_COMENTARIO } from "@/contracts/avaliacao";
 import {
   RESPOSTA_VAZIA,
   type RespostaRascunho,
   type SecaoQuestionario,
-} from "./tipos-simulados";
+} from "./tipos";
 
-export const LIMITE_COMENTARIO = 2000;
+export { LIMITE_COMENTARIO };
 
 /** Opções da escala, em ordem crescente (ex.: 1 a 10). Vazio se a escala for inválida. */
 export function opcoesDaEscala(min: number, max: number): number[] {

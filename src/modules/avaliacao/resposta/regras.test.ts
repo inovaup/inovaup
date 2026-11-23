@@ -9,18 +9,20 @@ import {
   pendenciasDaSecao,
   respostaValida,
 } from "./regras";
-import type { SecaoQuestionario } from "./tipos-simulados";
+import type { SecaoQuestionario } from "./tipos";
 
 const performance: SecaoQuestionario = {
   id: "s1",
+  ciclo_id: "ciclo",
   nome: "Performance",
   escala_min: 1,
   escala_max: 10,
   permite_na: true,
+  peso: 1,
   ordem: 1,
   competencias: [
-    { id: "c2", pergunta: "Preza pela organização", ordem: 2 },
-    { id: "c1", pergunta: "Cumpre prazos", ordem: 1 },
+    { id: "c2", secao_id: "s1", pergunta: "Preza pela organização", peso: 1, ordem: 2 },
+    { id: "c1", secao_id: "s1", pergunta: "Cumpre prazos", peso: 1, ordem: 1 },
   ],
 };
 const comportamental: SecaoQuestionario = { ...performance, id: "s2", permite_na: false };

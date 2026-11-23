@@ -7,7 +7,7 @@ import {
   RESPOSTA_VAZIA,
   type RespostaRascunho,
   type SecaoQuestionario as Secao,
-} from "./tipos-simulados";
+} from "./tipos";
 
 type Props = {
   secao: Secao;

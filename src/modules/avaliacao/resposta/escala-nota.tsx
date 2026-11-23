@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { alternarNaoSeAplica, escolherValor, opcoesDaEscala } from "./regras";
-import type { RespostaRascunho } from "./tipos-simulados";
+import type { RespostaRascunho } from "./tipos";
 
 type Props = {
   /** Identificador único no formulário (ex.: id da competência). */
