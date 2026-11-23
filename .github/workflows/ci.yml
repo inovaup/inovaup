@@ -54,18 +54,26 @@ jobs:
           supabase start
           -x studio,imgproxy,storage-api,realtime,edge-runtime,logflare,vector,supavisor,mailpit
 
-      # psql roda o arquivo inteiro (vários comandos, com BEGIN/ROLLBACK) e para no
-      # primeiro erro. Se falhar, o motivo vira uma anotação visível no PR.
-      - name: Verificação SQL da RLS do núcleo
+      # Roda TODOS os arquivos de supabase/verificacoes/ (núcleo, avaliação e os
+      # que vierem). psql roda cada arquivo inteiro (vários comandos, com
+      # BEGIN/ROLLBACK) e para no primeiro erro. Se falhar, o motivo vira uma
+      # anotação visível no PR. Cada arquivo termina com "OK: todas as verificações...".
+      - name: Verificações SQL de RLS
         run: |
           DB_URL=$(supabase status -o json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s).DB_URL))')
-          if ! psql "$DB_URL" -v ON_ERROR_STOP=1 -X -q -f supabase/verificacoes/nucleo_rls.sql > verificacao.txt 2> erro.txt; then
-            cat verificacao.txt erro.txt
-            echo "::error title=Verificação SQL da RLS::$(tr '\n' ' ' < erro.txt | cut -c1-500)"
-            exit 1
-          fi
-          cat verificacao.txt
-          grep -q "OK: todas as verificações da RLS do núcleo passaram" verificacao.txt
+          for arquivo in supabase/verificacoes/*.sql; do
+            echo "== $arquivo"
+            if ! psql "$DB_URL" -v ON_ERROR_STOP=1 -X -q -f "$arquivo" > verificacao.txt 2> erro.txt; then
+              cat verificacao.txt erro.txt
+              echo "::error title=Verificação SQL ($arquivo)::$(tr '\n' ' ' < erro.txt | cut -c1-500)"
+              exit 1
+            fi
+            cat verificacao.txt
+            if ! grep -q "OK: todas as verificações" verificacao.txt; then
+              echo "::error title=Verificação SQL ($arquivo)::terminou sem a linha OK"
+              exit 1
+            fi
+          done
 
       # As chaves do Supabase local são as padrão de desenvolvimento (não são segredo).
       # Os nomes das variáveis seguem o .env.example.
