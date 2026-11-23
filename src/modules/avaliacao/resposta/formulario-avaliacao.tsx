@@ -31,7 +31,14 @@ export function FormularioAvaliacao({
   const [comentarios, setComentarios] = useState(comentariosIniciais);
   const [destacar, setDestacar] = useState(false);
   const [aviso, setAviso] = useState<Aviso>(null);
+  const [confirmando, setConfirmando] = useState(false);
   const [enviando, iniciar] = useTransition();
+
+  /** Qualquer mudança apaga o aviso anterior e cancela a confirmação pendente. */
+  function aoMudar() {
+    setAviso(null);
+    setConfirmando(false);
+  }
 
   const faltando = secoes.reduce((n, s) => n + pendenciasDaSecao(s, respostas).length, 0);
 
@@ -50,13 +57,19 @@ export function FormularioAvaliacao({
     });
   }
 
-  function enviar() {
+  function pedirEnvio() {
     if (faltando > 0) {
       setDestacar(true);
       setAviso({ tipo: "erro", texto: `Faltam ${faltando} competência(s) sem resposta.` });
       return;
     }
-    if (!window.confirm("Enviar a avaliação? Depois de enviada, ela não pode ser alterada.")) return;
+    // Confirmação na própria página (window.confirm é bloqueado em alguns navegadores embutidos).
+    setAviso(null);
+    setConfirmando(true);
+  }
+
+  function confirmarEnvio() {
+    setConfirmando(false);
     iniciar(async () => {
       const r = await enviarAvaliacao(entrada());
       if (r.ok) {
@@ -76,8 +89,14 @@ export function FormularioAvaliacao({
           secao={s}
           respostas={respostas}
           comentario={comentarios[s.id] ?? ""}
-          onResposta={(id, r) => setRespostas((atual) => ({ ...atual, [id]: r }))}
-          onComentario={(t) => setComentarios((atual) => ({ ...atual, [s.id]: t }))}
+          onResposta={(id, r) => {
+            aoMudar();
+            setRespostas((atual) => ({ ...atual, [id]: r }));
+          }}
+          onComentario={(t) => {
+            aoMudar();
+            setComentarios((atual) => ({ ...atual, [s.id]: t }));
+          }}
           somenteLeitura={somenteLeitura}
           destacarPendentes={destacar}
         />
@@ -88,9 +107,25 @@ export function FormularioAvaliacao({
           <Button variant="outline" onClick={salvar} disabled={enviando}>
             Salvar rascunho
           </Button>
-          <Button onClick={enviar} disabled={enviando}>
-            Enviar avaliação
-          </Button>
+          {confirmando ? (
+            <div
+              role="alertdialog"
+              aria-label="Confirmar envio"
+              className="flex flex-wrap items-center gap-2 rounded-md border border-destructive/50 px-3 py-2"
+            >
+              <span className="text-sm">Depois de enviada, a avaliação não pode ser alterada.</span>
+              <Button onClick={confirmarEnvio} disabled={enviando}>
+                Confirmar envio
+              </Button>
+              <Button variant="ghost" onClick={() => setConfirmando(false)} disabled={enviando}>
+                Cancelar
+              </Button>
+            </div>
+          ) : (
+            <Button onClick={pedirEnvio} disabled={enviando}>
+              Enviar avaliação
+            </Button>
+          )}
           <span className="text-sm text-muted-foreground">
             {faltando > 0 ? `Faltam ${faltando} competência(s).` : "Tudo respondido."}
           </span>
