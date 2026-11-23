@@ -64,7 +64,7 @@ Consequências:
 Resumo; o detalhe está em [`regras/seguranca-da-demo.md`](regras/seguranca-da-demo.md):
 - **Autenticação:** Supabase Auth com e-mail e senha, **cadastro desligado**, contas fictícias criadas só pela semente (`@demo.inovaup.test`, senhas aleatórias de 16 caracteres ou mais). Sem "login de dev" e sem envio de e-mail.
 - **Papéis:** a coluna `papel` em `perfis` é escrita só pela semente (`service_role`), sem política de UPDATE para usuários. Nunca guardar papel em `user_metadata`. `requireRole()` lê o banco a cada requisição. Um teste prova que ninguém consegue se promover.
-- **HTTPS e sessão:** a demo roda em `http://localhost`, só no computador de quem apresenta. As chamadas ao Supabase são HTTPS. Cookies `httpOnly` e `SameSite=Lax`. A chave `service_role` fica só em `.env.local`. Ao publicar (MVP operacional): HTTPS com HSTS.
+- **HTTPS e sessão:** a demo roda em `http://localhost`, só no computador de quem apresenta. As chamadas ao Supabase são HTTPS. Cookies de sessão `SameSite=Lax`, mas **não** `httpOnly` (padrão do `@supabase/ssr`, porque o login usa o cliente do navegador; ver `revisao-seguranca-2-12.md`, S1). A chave `service_role` fica só em `.env.local`. Ao publicar (MVP operacional): HTTPS com HSTS.
 
 ## 5. Proteção contra identificação indireta
 
@@ -131,3 +131,9 @@ Pedidos e pendências que ficam fora do MVP demonstrável (regra do `CLAUDE.md`:
 
 - **Testes de navegador das páginas** (abrir cada tela com cada papel). Exigem subir o Next.js no CI. Até 4/12, as páginas ficam cobertas pela checagem de `requireRole()` no código e pelos testes da sessão. Origem: plano da Q1, combinado com o Daniel em 23/11.
 - **Contador do painel da GP:** lê as atribuições numa consulta só, e o Supabase devolve no máximo 1.000 linhas por consulta; contar por ciclo. Origem: revisão da A8.
+- **Sessão em cookie `httpOnly`** (achado S1 da Q2): fazer o login por ação de servidor e adicionar CSP. Origem: revisão de segurança, 23/11.
+- **Visibilidade do repositório e proteção da `main`** (S2): decidir antes do MVP operacional e de qualquer dado real.
+- **Cabeçalhos de segurança** (CSP, `frame-ancestors`, desligar `X-Powered-By`) ao publicar (S3).
+- **Senhas novas no dev** (S5): rodar a semente no dev, porque as de 4 contas de teste passaram pelo chat.
+- **Ações do GitHub fixadas por hash** (S6).
+- **Contagens por grupo para a GP** (R7, S8): tela só da GP, fora do relatório gravado.

@@ -26,7 +26,7 @@ Estas regras valem desde o primeiro PR e **não se cortam para cumprir prazo**. 
 
 - A demo roda em `http://localhost`, **só no computador de quem apresenta**. Não abrir pela rede local, por túnel nem no celular.
 - As chamadas ao Supabase são sempre HTTPS.
-- Cookies de sessão `httpOnly` e `SameSite=Lax` (padrão do `@supabase/ssr`), com `Secure` quando houver HTTPS.
+- Cookies de sessão `SameSite=Lax`, com `Secure` quando houver HTTPS. **Não** são `httpOnly`: é o padrão do `@supabase/ssr`, porque o login usa o cliente do navegador. Por isso não há HTML injetado nem script de terceiros nas telas. Cookie `httpOnly` (login por ação de servidor) e CSP ficam para depois de 4/12 (`revisao-seguranca-2-12.md`, S1).
 - Ao publicar (MVP operacional): HTTPS da hospedagem, HSTS e cabeçalhos de segurança (CSP sem terceiros).
 
 ## Acesso a dados
