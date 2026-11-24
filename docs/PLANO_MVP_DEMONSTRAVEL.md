@@ -137,3 +137,4 @@ Pedidos e pendências que ficam fora do MVP demonstrável (regra do `CLAUDE.md`:
 - **Senhas novas no dev** (S5): rodar a semente no dev, porque as de 4 contas de teste passaram pelo chat.
 - **Ações do GitHub fixadas por hash** (S6).
 - **Contagens por grupo para a GP** (R7, S8): tela só da GP, fora do relatório gravado.
+- **Revogar o `EXECUTE` de `public.rls_auto_enable()`** para `anon` numa migração, no dev e no demo (S11). Origem: verificador do Supabase, revisão do Davi na Q2.

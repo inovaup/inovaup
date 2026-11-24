@@ -7,7 +7,7 @@
 
 ## Resultado
 
-**Nenhum achado grave.** O MVP pode ser demonstrado como está. Há dois achados médios (um corrigido nesta revisão, na documentação; o outro é decisão da equipe) e alguns baixos, todos para depois de 4/12.
+**Nenhum achado grave.** O MVP pode ser demonstrado como está. Há dois achados médios (um corrigido nesta revisão, na documentação; o outro é decisão da equipe) e alguns baixos: dois entram na preparação da demo (S12 e S13, no roteiro) e os outros ficam para depois de 4/12.
 
 ## O que foi verificado e está certo
 
@@ -36,7 +36,7 @@
 | ID | Gravidade | Achado | Decisão | Responsável | Situação |
 |---|---|---|---|---|---|
 | S1 | Médio | **Os cookies de sessão não são `httpOnly`.** O padrão do `@supabase/ssr` é `httpOnly: false`, porque o login usa o cliente do navegador. O plano (seção 4) e a `seguranca-da-demo.md` afirmavam o contrário. Risco: um XSS poderia ler a sessão. Mitigações atuais: React escapa todo texto, não há HTML injetado nem script de terceiros, e a demo roda em `localhost` | Para 4/12: aceito, e a documentação foi corrigida nesta revisão. Depois de 4/12: login por ação de servidor com cookies `httpOnly`, mais CSP | Daniel | Doc corrigida; código depois de 4/12 |
-| S2 | Médio (processo) | **O repositório está público**, embora a D-06 diga privado. Verificado que não há segredos nem dados reais em nenhum commit, mas a documentação e a arquitetura ficam expostas | Decidir a visibilidade (e a proteção da `main`) antes do MVP operacional e antes de qualquer dado real | Davi e Daniel | Aberto, não bloqueia a demo |
+| S2 | Médio (processo) | **O repositório está público**, embora a D-06 diga privado. Verificado que não há segredos nem dados reais em nenhum commit, mas a documentação e a arquitetura ficam expostas | Decidir a visibilidade (e a proteção da `main`) antes do MVP operacional e antes de qualquer dado real. Atenção: no GitHub Free, a proteção da `main` só existe em repositório público (observação do Davi) | Davi e Daniel | Aberto, não bloqueia a demo |
 | S3 | Baixo | Sem cabeçalhos de segurança (CSP, `frame-ancestors`), e o `X-Powered-By: Next.js` está ligado | Irrelevante em `localhost`; configurar ao publicar | Daniel | Depois de 4/12 |
 | S4 | Baixo | O login da CLI do Supabase no computador do Daniel dá acesso de gestão aos projetos da organização | Rodar `npx supabase@3.2.0 logout` depois da demo; não deixar o computador desbloqueado | Daniel | Depois da Q3 |
 | S5 | Baixo | As senhas fictícias de 4 contas do **dev** passaram pelo chat do Claude (e uma saída de comando). As do demo não passaram | Rodar a semente no dev depois de 4/12, com senhas novas | Davi | Depois de 4/12 |
@@ -45,6 +45,11 @@
 | S8 | Informativo | A R7 prevê que a GP veja as contagens por grupo; elas ficaram fora do relatório gravado (o avaliado lê a linha inteira) e hoje a GP não as vê em lugar nenhum | Tela só da GP, depois de 4/12 | Daniel | Depois de 4/12 |
 | S9 | Informativo | O projeto demo não tem o histórico de migrações do Supabase (aplicadas pela API, por falta de IPv6) | Migração nova no demo só pelo mesmo caminho, avisando antes | Daniel | Registrado |
 | S10 | Informativo | Um comentário pode identificar o autor pelo conteúdo ou pelo estilo, mesmo sem nome e em ordem neutra | O campo já avisa "Comentários aparecem sem autor"; orientar os avaliadores no MVP operacional | GP | Depois de 4/12 |
+| S11 | Baixo | O verificador de segurança do Supabase acusa que `anon` pode executar `public.rls_auto_enable()`. A função é do próprio Supabase (a opção "ligar a RLS sozinha em tabela nova", um gatilho de eventos do banco), não das nossas migrações, e função de gatilho de eventos não pode ser chamada pela API | Revogar o `EXECUTE` numa migração depois de 4/12. Conferir também no demo, que foi criado com essa opção | Davi | Depois de 4/12 |
+| S12 | Baixo | O `npm run dev` escuta na rede local: qualquer pessoa no mesmo Wi-Fi abre a tela de login pelo IP do computador | Na demo, rodar `npx next dev -H 127.0.0.1` e conferir que o terminal não mostra "Network" (no roteiro) | Daniel | Na Q3 |
+| S13 | Baixo | A telemetria do Next.js está ligada no computador da apresentação | Rodar `npx next telemetry disable` na preparação (no roteiro) | Daniel | Na Q3 |
+
+As funções `security definer` que o verificador do Supabase lista são intencionais: conferem o papel ou o dono por dentro e estão testadas na verificação SQL e na Q1. A proteção contra senhas vazadas do Auth só existe no plano pago. (Verificador rodado pelo Davi no dev.)
 
 ## Correções feitas nesta revisão
 
