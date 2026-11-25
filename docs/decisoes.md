@@ -37,5 +37,6 @@ Registro curto. Uma decisão nova ou mudada entra aqui por PR revisado pelo outr
 | P-05 | Quem guarda a chave do pseudônimo das pesquisas (e o novo texto do RNF-02) | Diretoria de GP | Antes das pesquisas |
 | P-06 | Orçamento dos planos pagos (Supabase Pro no portão de dados reais) | Diretoria | Antes da produção |
 | P-07 | Disponibilidade de Davi e Daniel nas festas de fim de ano | Davi e Daniel | Até 4/12 |
-| P-08 | O que cabe até 18/12, ou uma nova data: as Etapas 1 a 3 da auditoria somam 113 a 160 h, sem login, pessoas e publicação, contra cerca de 112 h de 5/12 a 18/12 | Davi e Daniel | Antes de 5/12 |
+| P-08 | O que cabe até 18/12, ou uma nova data: as Etapas 1 a 3 da auditoria somam 113 a 160 h, mais 24 a 38 h de login pelo Google, cadastro de pessoas e publicação (estimativa do Davi, sem revisão), contra cerca de 112 h de 5/12 a 18/12. **Posição do Davi (25/11):** manter o escopo do primeiro ciclo real e adiar a data para o P80 do plano (início de janeiro) | Davi e Daniel | Antes de 5/12, junto com a P-10 |
 | P-09 | Serviço de e-mail dos lembretes (D3): qual serviço, onde fica a chave e a base legal, porque o e-mail das pessoas vai para um terceiro | Davi, Daniel e diretoria | Antes de implementar os lembretes |
+| P-10 | **Cadastro de pessoas pela tela mexe no piso de segurança:** hoje `perfis` é 1:1 com a conta de login e o `papel` só é gravado pela semente, com a `service_role`. Decidir como criar pessoas pela tela e quem pode tornar alguém GP | Davi e Daniel | Antes de 5/12, junto com a P-08; antes de começar o login e o cadastro |
