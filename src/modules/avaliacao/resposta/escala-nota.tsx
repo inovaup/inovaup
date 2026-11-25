@@ -23,7 +23,10 @@ const opcao =
   "hover:bg-accent has-[:checked]:border-primary has-[:checked]:bg-primary has-[:checked]:text-primary-foreground " +
   "has-[:focus-visible]:ring-1 has-[:focus-visible]:ring-ring has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-60";
 
-/** Uma competência: a pergunta, a escala (ex.: 1 a 10) e "Não se aplica" quando a seção permite. */
+/**
+ * Uma competência: a pergunta, a escala (ex.: 1 a 10) e "Não se aplica" quando a seção permite.
+ * A legenda da escala fica no cabeçalho da seção (SecaoQuestionario).
+ */
 export function EscalaNota({
   nome,
   pergunta,
@@ -73,9 +76,6 @@ export function EscalaNota({
           </label>
         )}
       </div>
-      <p className="text-xs text-muted-foreground">
-        {min} = menor nota, {max} = maior nota
-      </p>
     </fieldset>
   );
 }

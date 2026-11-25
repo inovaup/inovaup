@@ -41,7 +41,13 @@ export default async function PainelPage() {
               </strong>{" "}
               avaliações respondidas
             </p>
-            <AcoesDoCiclo cicloId={c.id} status={c.status} liberados={c.relatorios_liberados} />
+            <AcoesDoCiclo
+              cicloId={c.id}
+              status={c.status}
+              liberados={c.relatorios_liberados}
+              enviadas={c.enviadas}
+              total={c.total}
+            />
             {c.status === "encerrado" && (
               <Link href={`/painel/relatorios/${c.id}`} className="self-start text-sm underline">
                 Ver relatórios do ciclo

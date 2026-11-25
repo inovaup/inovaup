@@ -1,4 +1,5 @@
 import { LogoutButton } from "@/components/logout-button";
+import { MenuPrincipal } from "@/components/menu-principal";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PAPEIS } from "@/contracts/core";
 import { requireRole } from "@/lib/auth/sessao";
@@ -24,11 +25,9 @@ export default async function AppLayout({
             <Link href="/inicio" className="font-semibold">
               InovaUp
             </Link>
-            {itensDoMenu(usuario.papel).map((item) => (
-              <Link key={item.href} href={item.href} className="hover:underline">
-                {item.rotulo}
-              </Link>
-            ))}
+            <MenuPrincipal
+              itens={itensDoMenu(usuario.papel).map(({ rotulo, href }) => ({ rotulo, href }))}
+            />
           </nav>
           <div className="flex items-center gap-4">
             <span>{usuario.nome}</span>
