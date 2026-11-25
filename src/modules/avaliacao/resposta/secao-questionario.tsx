@@ -38,7 +38,9 @@ export function SecaoQuestionario({
       <header className="flex flex-col gap-1">
         <h2 className="text-lg font-semibold">{secao.nome}</h2>
         <p className="text-sm text-muted-foreground">
-          Escala de {secao.escala_min} a {secao.escala_max}
+          {/* A legenda fica aqui, uma vez por seção, e não em cada competência (E0, achado C6). */}
+          Escala de {secao.escala_min} a {secao.escala_max} ({secao.escala_min} = menor nota,{" "}
+          {secao.escala_max} = maior nota)
           {secao.permite_na ? ", com a opção “Não se aplica”" : ""}.
         </p>
       </header>

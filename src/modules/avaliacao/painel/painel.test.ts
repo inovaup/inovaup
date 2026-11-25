@@ -8,7 +8,7 @@ vi.mock("./acoes", () => ({
   liberarRelatorios: vi.fn(),
 }));
 
-const { acoesDoEstado } = await import("./acoes-do-ciclo");
+const { acoesDoEstado, confirmacaoDeEncerrar } = await import("./acoes-do-ciclo");
 const { contarPorCiclo } = await import("./dados");
 
 describe("botões do painel por estado do ciclo", () => {
@@ -28,6 +28,19 @@ describe("botões do painel por estado do ciclo", () => {
   });
   it("liberado: nenhum botão (sem reabertura nem recálculo)", () => {
     expect(rotulos("encerrado", true)).toEqual([]);
+  });
+});
+
+describe("confirmação de encerrar diz quantas faltam (E0, B2)", () => {
+  it("várias, uma ou nenhuma pendente", () => {
+    expect(confirmacaoDeEncerrar(12, 14)).toMatch(/^Faltam 2 de 14 avaliações\. Ninguém mais poderá responder/);
+    expect(confirmacaoDeEncerrar(13, 14)).toMatch(/^Falta 1 de 14 avaliações\./);
+    expect(confirmacaoDeEncerrar(14, 14)).toMatch(/^Todas as avaliações foram respondidas \(14 de 14\)\./);
+  });
+  it("o botão de encerrar usa o contador do painel", () => {
+    expect(acoesDoEstado("aberto", false, { enviadas: 12, total: 14 })[0].confirmacao).toContain(
+      "Faltam 2 de 14 avaliações.",
+    );
   });
 });
 

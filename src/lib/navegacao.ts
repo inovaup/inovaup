@@ -15,3 +15,8 @@ export const ITENS_MENU: readonly ItemMenu[] = [
 export function itensDoMenu(papel: Papel): ItemMenu[] {
   return ITENS_MENU.filter((item) => item.papeis.includes(papel));
 }
+
+/** Se o item do menu é o da página atual: a própria rota ou uma sub-rota dela. */
+export function itemAtivo(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}

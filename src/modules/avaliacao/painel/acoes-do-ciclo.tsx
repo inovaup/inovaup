@@ -20,8 +20,24 @@ type Acao = {
   variante?: "default" | "outline";
 };
 
+const DEPOIS_DE_ENCERRAR = "Ninguém mais poderá responder. Em seguida, os relatórios são calculados.";
+
+/** Confirmação de encerrar com quantas avaliações ainda faltam (E0, achado B2). */
+export function confirmacaoDeEncerrar(enviadas: number, total: number): string {
+  const faltam = Math.max(total - enviadas, 0);
+  const situacao =
+    faltam === 0
+      ? `Todas as avaliações foram respondidas (${total} de ${total}).`
+      : `${faltam === 1 ? "Falta 1" : `Faltam ${faltam}`} de ${total} avaliações.`;
+  return `${situacao} ${DEPOIS_DE_ENCERRAR}`;
+}
+
 /** Os botões que valem para cada estado do ciclo. Sem reabertura, edição nem liberação individual. */
-export function acoesDoEstado(status: StatusCiclo, liberados: boolean): Acao[] {
+export function acoesDoEstado(
+  status: StatusCiclo,
+  liberados: boolean,
+  progresso?: { enviadas: number; total: number },
+): Acao[] {
   if (status === "rascunho") {
     return [{ rotulo: "Abrir ciclo", executar: abrirCiclo, confirmacao: "As pessoas passam a ver e responder as avaliações." }];
   }
@@ -30,7 +46,9 @@ export function acoesDoEstado(status: StatusCiclo, liberados: boolean): Acao[] {
       {
         rotulo: "Encerrar ciclo",
         executar: encerrarCiclo,
-        confirmacao: "Ninguém mais poderá responder. Em seguida, os relatórios são calculados.",
+        confirmacao: progresso
+          ? confirmacaoDeEncerrar(progresso.enviadas, progresso.total)
+          : DEPOIS_DE_ENCERRAR,
       },
     ];
   }
@@ -51,16 +69,21 @@ export function AcoesDoCiclo({
   cicloId,
   status,
   liberados,
+  enviadas,
+  total,
 }: {
   cicloId: string;
   status: StatusCiclo;
   liberados: boolean;
+  /** Contador "X de Y" do painel, para a confirmação de encerrar. */
+  enviadas: number;
+  total: number;
 }) {
   const router = useRouter();
   const [pendente, iniciar] = useTransition();
   const [confirmando, setConfirmando] = useState<Acao | null>(null);
   const [aviso, setAviso] = useState<{ ok: boolean; texto: string } | null>(null);
-  const acoes = acoesDoEstado(status, liberados);
+  const acoes = acoesDoEstado(status, liberados, { enviadas, total });
 
   function rodar(acao: Acao) {
     setConfirmando(null);
