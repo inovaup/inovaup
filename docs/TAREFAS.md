@@ -28,7 +28,7 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | A7 | Supressão e relatório reduzido | Daniel | Davi | 4 / 6 | 30/11–1/12 | [x] |
 | **G3** | **Portão: cálculo e relatório** | — | — | — | 1/12 | [x] |
 | Q1 | Lacunas de permissão | Davi | Daniel | 1,5 / 2,5 | 1–2/12 | [x] |
-| E0 | Refinamento antes do congelamento (D-17): C2, C3, B2 e legenda do C6 | Daniel | Davi | 4 / 5 | até 1/12 | [ ] |
+| E0 | Refinamento antes do congelamento (D-17): C2, C3, B2 e legenda do C6 | Daniel | Davi | 4 / 5 | até 1/12 | [x] |
 | Q2 | Revisão de segurança e correções; congelamento às 12h | Daniel / Davi | — | 2 / 3 · 1,5 / 3 | 2/12 | [x] |
 | Q3 | Demo: migrações e semente no projeto demo, roteiro, ensaio | Daniel | Davi | 2 / 3 | 3/12 | [ ] |
 | Cont. | Revisão de PRs sensíveis, integração diária, coordenação com a GP | Davi / Daniel | — | 5 / 7 · 6,5 / 9 | diário | — |
@@ -176,6 +176,7 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
   - **C6, só a legenda:** "1 = menor nota, 10 = maior nota" uma vez por seção, não em cada competência.
 - **Depende de** D-17 → **entrega:** um PR na raia do Daniel, revisado pelo Davi.
 - **Pronto quando:** o PR está juntado até 1/12; typecheck, lint e testes verdes; o ensaio no demo dá os mesmos números do roteiro (83,45%, 76,17% e a Colaboradora Dois só com a autoavaliação) e o "Acesso negado" do `/painel` para quem não é GP. Se algo quebrar, o PR é desfeito: a demo não depende desses itens.
+- **Feita em 25/11:** PR #24 juntado. Ensaio no demo, depois da semente: confirmação "Faltam 2 de 17" com o ciclo aberto e "Todas as avaliações foram respondidas (17 de 17)" antes de encerrar; Líder 83,45%, Colaborador Um 76,17% (só combinado), Colaboradora Dois só com a autoavaliação; "Acesso negado" no `/painel` para o Líder; tela "Carregando…" em português. "Página não encontrada", menu marcado e legenda da escala conferidos antes, no banco de desenvolvimento.
 
 ### Q2 — Revisão de segurança (Daniel 2 h revisão; Davi 1,5 h correções · IA 15 min)
 - **Construir:** `/security-review` mais o checklist de PR aplicado ao código todo. **Congelamento às 12h de 2/12.**

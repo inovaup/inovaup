@@ -62,7 +62,7 @@ Sair → entrar como **Líder** (`lider@demo.inovaup.test`) → **Avaliações**
 
 Janela normal, **GP**:
 - **Painel da GP**: "**17 de 17** avaliações respondidas". A GP vê só quantas foram respondidas, nunca o que foi respondido.
-- **Encerrar ciclo** → **Confirmar**: o ciclo fecha e o cálculo roda na hora ("Relatórios calculados para 4 pessoa(s)").
+- **Encerrar ciclo**: a confirmação avisa quantas faltam; aqui, "Todas as avaliações foram respondidas (17 de 17)" (se faltasse alguma, diria "Faltam N de 17"). → **Confirmar**: o ciclo fecha e o cálculo roda na hora ("Relatórios calculados para 4 pessoa(s)").
 
 ### 5:30 — Os relatórios e a regra de anonimato (2 min)
 
