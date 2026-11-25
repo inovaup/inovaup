@@ -28,11 +28,12 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 | A7 | Supressão e relatório reduzido | Daniel | Davi | 4 / 6 | 30/11–1/12 | [x] |
 | **G3** | **Portão: cálculo e relatório** | — | — | — | 1/12 | [x] |
 | Q1 | Lacunas de permissão | Davi | Daniel | 1,5 / 2,5 | 1–2/12 | [x] |
+| E0 | Refinamento antes do congelamento (D-17): C2, C3, B2 e legenda do C6 | Daniel | Davi | 4 / 5 | até 1/12 | [ ] |
 | Q2 | Revisão de segurança e correções; congelamento às 12h | Daniel / Davi | — | 2 / 3 · 1,5 / 3 | 2/12 | [x] |
 | Q3 | Demo: migrações e semente no projeto demo, roteiro, ensaio | Daniel | Davi | 2 / 3 | 3/12 | [ ] |
 | Cont. | Revisão de PRs sensíveis, integração diária, coordenação com a GP | Davi / Daniel | — | 5 / 7 · 6,5 / 9 | diário | — |
 
-**Totais (P50):** Davi **30,5 h** · Daniel **31 h**. No P80 (≈ 40 e ≈ 41,5 h), os portões aplicam os cortes.
+**Totais (P50):** Davi **30,5 h** · Daniel **31 h**. No P80 (≈ 40 e ≈ 41,5 h), os portões aplicam os cortes. A E0 (D-17), aprovada em 24/11, soma 4 h ao Daniel fora desse total.
 
 ## Detalhe das tarefas
 
@@ -166,6 +167,15 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 - **Construir:** testes faltantes por papel: relatório alheio, respostas alheias, painel da GP, troca de papel, acesso antes da liberação. Pode usar **um** subagente para gerar os casos, e o Davi revisa.
 - **Depende de** A5, A7, A8 → **entrega:** suíte no CI.
 - **Pronto quando:** tudo verde no CI.
+
+### E0 — Refinamento antes do congelamento (Daniel 4 h · IA 30 min) → D-17
+- **Construir** (itens da auditoria de 24/11; só tela, sem banco e sem regra de negócio):
+  - **C2:** `loading.tsx`, `error.tsx` e `not-found.tsx` na área logada, em português e com caminho de volta;
+  - **C3:** o item do menu da página atual fica marcado (`aria-current`); ícones e menu de celular ficam para depois de 4/12;
+  - **B2:** a confirmação de "Encerrar ciclo" mostra quantas avaliações faltam ("Faltam N de Y"), com o número que o painel já calcula;
+  - **C6, só a legenda:** "1 = menor nota, 10 = maior nota" uma vez por seção, não em cada competência.
+- **Depende de** D-17 → **entrega:** um PR na raia do Daniel, revisado pelo Davi.
+- **Pronto quando:** o PR está juntado até 1/12; typecheck, lint e testes verdes; o ensaio no demo dá os mesmos números do roteiro (83,45%, 76,17% e a Colaboradora Dois só com a autoavaliação) e o "Acesso negado" do `/painel` para quem não é GP. Se algo quebrar, o PR é desfeito: a demo não depende desses itens.
 
 ### Q2 — Revisão de segurança (Daniel 2 h revisão; Davi 1,5 h correções · IA 15 min)
 - **Construir:** `/security-review` mais o checklist de PR aplicado ao código todo. **Congelamento às 12h de 2/12.**

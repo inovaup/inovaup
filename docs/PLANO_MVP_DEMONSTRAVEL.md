@@ -129,12 +129,16 @@ Premissa: 4 h/dia, com pausa em 24–25/12 e 31/12–1/1.
 
 Pedidos e pendências que ficam fora do MVP demonstrável (regra do `CLAUDE.md`: pedido novo vem para cá).
 
-- **Testes de navegador das páginas** (abrir cada tela com cada papel). Exigem subir o Next.js no CI. Até 4/12, as páginas ficam cobertas pela checagem de `requireRole()` no código e pelos testes da sessão. Origem: plano da Q1, combinado com o Daniel em 23/11.
-- **Contador do painel da GP:** lê as atribuições numa consulta só, e o Supabase devolve no máximo 1.000 linhas por consulta; contar por ciclo. Origem: revisão da A8.
-- **Sessão em cookie `httpOnly`** (achado S1 da Q2): fazer o login por ação de servidor e adicionar CSP. Origem: revisão de segurança, 23/11.
+- **Testes de navegador das páginas** (abrir cada tela com cada papel). Exigem subir o Next.js no CI. Até 4/12, as páginas ficam cobertas pela checagem de `requireRole()` no código e pelos testes da sessão. Origem: plano da Q1, combinado com o Daniel em 23/11. Na auditoria de 24/11: B6.
+- **Contador do painel da GP:** lê as atribuições numa consulta só, e o Supabase devolve no máximo 1.000 linhas por consulta; contar por ciclo. Origem: revisão da A8. Na auditoria: B3.
+- **Sessão em cookie `httpOnly`** (achado S1 da Q2): fazer o login por ação de servidor e adicionar CSP. Origem: revisão de segurança, 23/11. Na auditoria: B5, com S3 e S11, antes do primeiro ciclo real (D-19).
 - **Visibilidade do repositório e proteção da `main`** (S2): decidir antes do MVP operacional e de qualquer dado real.
 - **Cabeçalhos de segurança** (CSP, `frame-ancestors`, desligar `X-Powered-By`) ao publicar (S3).
 - **Senhas novas no dev** (S5): rodar a semente no dev, porque as de 4 contas de teste passaram pelo chat.
 - **Ações do GitHub fixadas por hash** (S6).
-- **Contagens por grupo para a GP** (R7, S8): tela só da GP, fora do relatório gravado.
+- **Contagens por grupo para a GP** (R7, S8): tela só da GP, fora do relatório gravado. Na auditoria: B8.
 - **Revogar o `EXECUTE` de `public.rls_auto_enable()`** para `anon` numa migração, no dev e no demo (S11). Origem: verificador do Supabase, revisão do Davi na Q2.
+- **Refinamento da auditoria de 24/11** (D-18), sem data. IDs dos achados da auditoria:
+  - **Experiência central (Etapa 1):** B1 rascunho salvo sozinho e aviso ao sair do formulário; C4 Início com as pendências (e, para a GP, o ciclo aberto e o progresso); C6 progresso por seção e escala que caiba no celular; C8 data de envio na lista (a data de abertura do ciclo vai na migração do A8, D-19); A7 lista de pendências por avaliador para a GP, só com o status, nunca com respostas.
+  - **Identidade e acabamento (Etapa 2):** C1 identidade visual da EJ (espera o manual de marca); C5 componentes de página padronizados (cabeçalho, estado vazio, selo de status); C7 relatório com barras e o **mesmo texto genérico** ao lado de todo "indisponível" (nunca separar "todos marcaram N/A" de "só 1 respondeu", que revelaria que uma pessoa deu nota); A6 competências da maior para a menor, só na tela; C3 ícones e menu de celular; C9 avisos de sucesso e erro; C10 decidir o tema escuro; B4 `ehUuid` e nomes dos grupos num módulo comum; B7 `AGENTS.md` desligado, config do Vitest em `.mts` e `-H 127.0.0.1` no script `dev`, num PR próprio avisado.
+- **Ordem do MVP operacional, parte 1** (D-19): login pelo Google e pessoas ativas → A8 com a migração única → D1 → A7 (reabrir) e B5 antes do primeiro ciclo real → A1 depois das regras da GP. O que cabe até 18/12 depende da P-08; o e-mail, da P-09.
