@@ -131,6 +131,7 @@ Pedidos e pendências que ficam fora do MVP demonstrável (regra do `CLAUDE.md`:
 
 - **Testes de navegador das páginas** (abrir cada tela com cada papel). Exigem subir o Next.js no CI. Até 4/12, as páginas ficam cobertas pela checagem de `requireRole()` no código e pelos testes da sessão. Origem: plano da Q1, combinado com o Daniel em 23/11. Na auditoria de 24/11: B6.
 - **Contador do painel da GP:** lê as atribuições numa consulta só, e o Supabase devolve no máximo 1.000 linhas por consulta; contar por ciclo. Origem: revisão da A8. Na auditoria: B3.
+- **Ciclo sem atribuições no painel:** a confirmação de encerrar mostraria "Todas as avaliações foram respondidas (0 de 0)". Tratar quando o A8 deixar a GP criar ciclos. Origem: revisão do Davi no PR #25, 26/11.
 - **Sessão em cookie `httpOnly`** (achado S1 da Q2): fazer o login por ação de servidor e adicionar CSP. Origem: revisão de segurança, 23/11. Na auditoria: B5, com S3 e S11, antes do primeiro ciclo real (D-19).
 - **Visibilidade do repositório e proteção da `main`** (S2): decidir antes do MVP operacional e de qualquer dado real.
 - **Cabeçalhos de segurança** (CSP, `frame-ancestors`, desligar `X-Powered-By`) ao publicar (S3).
