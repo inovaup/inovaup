@@ -192,3 +192,142 @@ As horas são **humanas**, em P50 / P80. "IA" é o tempo de execução do Claude
 - **Davi 5 h** (revisões 3,5 h; integração 1,5 h) e **Daniel 6,5 h** (revisões 3,5 h; integração 2 h; coordenação com a GP 1 h).
 - Revisão obrigatória de todo PR que toca SQL, RLS, autenticação, ações de servidor ou variáveis.
 - 10 a 15 minutos de alinhamento por dia: o que foi feito, o que trava e marcar o status acima.
+
+---
+
+# MVP operacional, parte 1 (a partir de 5/12/2026)
+
+**Escopo e ordem:** D-19 e D-20, o primeiro ciclo real. **Prazo máximo:** início de janeiro de 2027, se a P-07 (disponibilidade nas festas) e as respostas da GP saírem a tempo; se o escopo ficar pronto antes, a homologação com a GP é antecipada. Os códigos entre parênteses (A7, B1, C4…) são os achados da auditoria de 24/11.
+
+**Fica para depois da homologação:** visibilidade das perguntas (A1), e-mail e lembretes (D3, P-09), comentário por competência (A4), pesos e mínimo pela tela (D2), média da organização e PDF (A6), visão do líder (A9) e as Etapas 2 e 4 da auditoria.
+
+**Estimativa inicial, a revisar com o Davi:** Davi **45 / 66 h** e Daniel **47 / 70 h** (P50 / P80). De 5/12 a 18/12, a 4 h/dia, há cerca de 56 h para cada um: o P50 cabe até lá; o P80 vai até o início de janeiro, com as pausas de 24–25/12 e 31/12–1/1.
+
+**Regra de revisão:** PR de código só é juntado depois do comentário de revisão do outro integrante (combinado em 26/11).
+
+## Pré-requisitos
+
+| Pré-requisito | Trava | Quem decide ou responde |
+|---|---|---|
+| P-10 decidida e registrada (D-21) | O1, O2 e O3 | Davi e Daniel |
+| App de login do Google interno ao domínio (P-04, pergunta 13) | O2 | Diretor de GP |
+| Perguntas 23 e 25 (cadastro antes do login; quem vira GP) | O3 | GP |
+| Perguntas 2 e 20 (regras de quem avalia quem; títulos da planilha do mapa) | O6 e O7 | GP |
+| Perguntas 1, 3, 14, 16, 17 e 18 (pesos, seções, mínimo, textos, prazo, abertura) | Conteúdo do primeiro ciclo | GP |
+| Hospedagem (P-02) e se a homologação usa dados fictícios ou reais (dados reais só depois do portão com Supabase Pro, P-06) | O11 e O13 | Diretoria |
+
+## Resumo
+
+| ID | Tarefa | Resp. | Revisor | P50 / P80 | Janela | Status |
+|---|---|---|---|---|---|---|
+| O1 | Pessoas como cadastro, "minha pessoa" e papéis (P-10) → contrato I1 v2 | Davi | Daniel | 14 / 20 | 5–11/12 | [ ] |
+| O2 | Login pelo Google e sessão no servidor (S1) → contrato I2 v2 | Daniel | Davi | 6 / 10 | 7–13/12 | [ ] |
+| O3 | Tela de pessoas: cadastro, importação e papéis | Daniel | Davi | 6 / 9 | 9–15/12 | [ ] |
+| **GO1** | **Portão: login, cadastro e permissões verdes** | — | — | — | ~13/12 | [ ] |
+| O4 | Ciclo e questionário pela tela, banco (A8 com A2, A3, A5 e C8) → contrato I3 v2 | Davi | Daniel | 12 / 16 | 12–18/12 | [ ] |
+| O5 | Ciclo e questionário pela tela, telas | Daniel | Davi | 12 / 16 | 14–23/12 | [ ] |
+| O6 | Mapa com as relações da EJ, banco (D1, D4) | Davi | Daniel | 6 / 10 | 16–23/12 | [ ] |
+| O7 | Mapa: importar, duplicar e ajustar | Daniel | Davi | 6 / 10 | 19–27/12 | [ ] |
+| **GO2** | **Portão: um ciclo montado pela tela, do questionário ao mapa** | — | — | — | ~27/12 | [ ] |
+| O8 | Acompanhamento: pendências e reabrir (A7, B3) | Daniel / Davi | Davi / Daniel | 4 / 6 · 3 / 4 | 19–28/12 | [ ] |
+| O9 | Experiência central: rascunho sozinho, Início e progresso (B1, C4, C6) | Daniel | Davi | 6 / 8 | 12–28/12 | [ ] |
+| O10 | Segurança para publicar (B5: S3 e S11) | Daniel / Davi | Davi / Daniel | 2 / 3 · 1 / 2 | até 30/12 | [ ] |
+| O11 | Publicação do ambiente de homologação | Davi / Daniel | Daniel / Davi | 4 / 6 · 2 / 4 | 28/12–5/1 | [ ] |
+| O12 | Fórmula validada pela GP | Davi | Daniel | 2 / 4 | quando a GP responder | [ ] |
+| **GO3** | **Portão: pronto para homologar** | — | — | — | ~5/1 | [ ] |
+| O13 | Homologação com a GP | Davi / Daniel | — | 3 / 4 cada | início de janeiro | [ ] |
+
+As janelas supõem a P-07 em aberto: se um dos dois estiver fora nas festas, as tarefas daquela semana andam.
+
+## Detalhe das tarefas
+
+### O1 — Pessoas como cadastro, "minha pessoa" e papéis (Davi 14 h) → contrato **I1 v2**
+- **Construir** (decisões da P-10):
+  - `perfis` ganha um id próprio e um campo `usuario_id`, vazio até o primeiro login e único; participações, atribuições e relatórios continuam apontando para `perfis`;
+  - função "qual é a minha pessoa" (`security definer`, `search_path` vazio): devolve o perfil ligado ao usuário logado e **nada** para quem está `desligada` (`trainee` entra); as 9 regras de acesso e o `eh_gp()` passam por ela;
+  - `cadastrar_pessoa` (só GP; papel só `colaborador` ou `lider`) e `definir_papel` (só GP; ninguém muda o próprio papel; trava contra o sistema ficar sem GP; registro de quem mudou, de quem, de/para e quando, legível pela GP);
+  - função de uso único da primeira GP: só roda enquanto não existe GP, grava o registro e tem o `EXECUTE` revogado para `anon` e `authenticated`;
+  - gancho Before User Created (função Postgres) e gatilho em `auth.users` que liga a conta ao perfil e recusa quem não está cadastrado; o gancho fica ligado no `config.toml` do CI;
+  - a semente cadastra as pessoas antes de criar as contas; contrato I1 atualizado em PR `[CONTRATO]`.
+- **Depende de** D-21 → **entrega:** I1 v2.
+- **Pronto quando:** as verificações SQL do CI provam que o gancho recusa e-mail não cadastrado e pessoa desligada (com um JSON de exemplo); o gatilho liga e recusa (inserção direta em `auth.users`); a pessoa desligada não lê nem grava nada; ninguém muda o próprio papel; o sistema não fica sem GP; o cadastro não cria GP; a função da primeira GP não roda para `anon` e `authenticated` nem quando já existe GP. Os testes de RLS anteriores continuam verdes.
+
+### O2 — Login pelo Google e sessão no servidor (Daniel 6 h) → contrato **I2 v2**
+- **Construir:**
+  - login pelo Google, com a troca do código feita no servidor;
+  - `getCurrentUser()` e `requireRole()` encontram a pessoa pelo `usuario_id`;
+  - sessão em cookie `httpOnly` se o fluxo ficar todo no servidor (S1); conferir antes na documentação local do Next 16 e do `@supabase/ssr`;
+  - login por e-mail e senha só nos projetos de desenvolvimento e demo, para as contas fictícias; na homologação e na produção, só o Google;
+  - "Acesso negado" orienta quem não está cadastrado a procurar a GP.
+- **Depende de** O1 e do app do Google (P-04) → **entrega:** I2 v2.
+- **Pronto quando:** no projeto de desenvolvimento, uma conta Google cadastrada entra, uma não cadastrada é recusada e uma desligada cai em "Acesso negado"; os testes de sessão e o `rotas.test.ts` continuam verdes.
+
+### O3 — Tela de pessoas: cadastro, importação e papéis (Daniel 6 h)
+- **Construir:** `/pessoas` deixa de ser só leitura: cadastrar e editar pessoa (nome, e-mail, área, cargo, nível, situação); importar planilha com prévia antes de gravar; mudar papel por `definir_papel`, com o registro visível. Tornar alguém GP só por essa função. Tudo só para a GP.
+- **Depende de** O1 e das perguntas 23 e 25 → **entrega:** tela.
+- **Pronto quando:** os testes das ações provam `requireRole("gp")`, entrada validada e que uma planilha com linha inválida não grava nada; colaborador e líder não acessam.
+
+### GO1 — Portão: login, cadastro e permissões (~13/12)
+- **Pronto quando:** O1 a O3 juntados com o CI verde, e um teste no projeto de desenvolvimento: a GP cadastra uma pessoa, ela entra pelo Google, e o papel muda com registro.
+
+### O4 — Ciclo e questionário pela tela, banco (Davi 12 h) → contrato **I3 v2**
+- **Construir** (uma migração só):
+  - `ciclos` ganha prazo, texto de introdução e data de abertura (preenchida ao abrir); `competencias` ganha descrição;
+  - a GP grava ciclos, seções, competências e pesos enquanto o ciclo está em rascunho, e nada depois de aberto (trava no banco);
+  - criar o ciclo já insere os pesos 1/2/2/2;
+  - importação do questionário por planilha.
+- **Depende de** GO1 → **entrega:** I3 v2.
+- **Pronto quando:** as verificações SQL provam que a GP grava em rascunho e não grava depois de aberto, e que colaborador e líder não gravam; os testes da Q1 continuam verdes.
+
+### O5 — Ciclo e questionário pela tela, telas (Daniel 12 h)
+- **Construir:** criar e editar o ciclo (nome, prazo, introdução), as seções e as competências com descrição, ou importar o questionário; abrir só com questionário e mapa completos. O formulário de resposta mostra a introdução, o prazo e a descrição de cada competência. Lista, painel e relatório mostram prazo, data de abertura e data de envio (C8).
+- **Depende de** O4 → **entrega:** telas.
+- **Pronto quando:** uma GP fictícia monta um ciclo completo pela tela no projeto de desenvolvimento; os testes das ações passam; a semente da demo continua funcionando.
+
+### O6 — Mapa com as relações da EJ, banco (Davi 6 h)
+- **Construir:** as atribuições guardam a relação da EJ (liderança direta, de esquadra e de projeto; pares de projeto e de esquadra; liderados), além do grupo de peso; importação do mapa no formato da planilha da GP (pergunta 20); duplicar o mapa do ciclo anterior; só pessoas que não estão desligadas (D4); a GP grava o mapa só com o ciclo em rascunho.
+- **Depende de** O4 e das perguntas 2 e 20 → **entrega:** contrato do mapa no I3 v2.
+- **Pronto quando:** as verificações SQL provam a trava do rascunho, a recusa de pessoa desligada e a duplicação sem repetir atribuições.
+
+### O7 — Mapa: importar, duplicar e ajustar (Daniel 6 h)
+- **Construir:** importar a planilha com prévia e erro por linha; duplicar o mapa do ciclo anterior; ajustar pessoa a pessoa; antes de abrir, mostrar à GP quantos avaliadores cada pessoa terá por grupo.
+- **Depende de** O6 → **entrega:** tela.
+- **Pronto quando:** os testes das ações passam e uma planilha com erro não grava nada.
+
+### GO2 — Portão: um ciclo montado pela tela (~27/12)
+- **Pronto quando:** no projeto de desenvolvimento, a GP fictícia cria o ciclo, importa o questionário e o mapa e abre o ciclo; os avaliadores respondem; o cálculo e o relatório saem como hoje.
+
+### O8 — Acompanhamento: pendências e reabrir (Daniel 4 h; Davi 3 h)
+- **Construir:**
+  - **Daniel:** lista de pendências por avaliador e por avaliado, só com o status, nunca com respostas; contador contado no banco (B3); ciclo sem atribuições não mostra "0 de 0" na confirmação de encerrar;
+  - **Davi:** função de reabrir uma avaliação enviada, só com o ciclo aberto e antes de qualquer cálculo; **Daniel:** o botão, com confirmação.
+- **Depende de** GO2 → **entrega:** acompanhamento.
+- **Pronto quando:** os testes provam que a GP vê só o status; reabrir é recusado com o ciclo encerrado ou depois de um cálculo; a avaliação reaberta volta como pendente para o avaliador.
+
+### O9 — Experiência central (Daniel 6 h)
+- **Construir:** rascunho salvo sozinho alguns segundos depois da última mudança, com aviso ao sair com alterações pendentes (B1); o salvamento automático nunca concorre com o "Enviar" (observação do Davi em 26/11); Início com as pendências e o prazo e, para a GP, o ciclo aberto e o progresso (C4); progresso por seção e escala que caiba no celular (C6).
+- **Depende de** O5, para o prazo → **entrega:** telas.
+- **Pronto quando:** os testes das regras novas passam e o roteiro da demo é atualizado.
+
+### O10 — Segurança para publicar (Daniel 2 h; Davi 1 h)
+- **Construir:** **Daniel:** cabeçalhos de segurança (CSP, `frame-ancestors`, sem `X-Powered-By`) no `next.config.ts`, em PR próprio e avisado (S3). **Davi:** migração que revoga o `EXECUTE` de `public.rls_auto_enable()` para `anon` (S11). O S1 entra na O2.
+- **Depende de** — → **entrega:** achados S1, S3 e S11 da Q2 fechados.
+- **Pronto quando:** o verificador do Supabase não acusa mais o S11 e os cabeçalhos aparecem nas respostas do app.
+
+### O11 — Publicação do ambiente de homologação (Davi 4 h; Daniel 2 h)
+- **Construir:** o projeto Supabase de homologação com as migrações, o gancho ligado e o login por e-mail desligado; a hospedagem decidida na P-02, com as variáveis só no provedor; a primeira GP criada pela função de uso único, com a assinatura do diretor de GP.
+- **Depende de** GO2, O10, P-02 e da decisão sobre dados na homologação → **entrega:** endereço de homologação.
+- **Pronto quando:** só contas do domínio cadastradas entram; o `service_role` não aparece no navegador nem no repositório; a revisão de segurança da Q2 é refeita no ambiente publicado.
+
+### O12 — Fórmula validada pela GP (Davi 2 h)
+- **Construir:** comparar a conta do InovaUp com um relatório do Impulse Up que a GP fornecer sem nomes (pergunta 1 e um caso de referência); ajustar os parâmetros se preciso e registrar a validação em `regras/calculo-da-nota.md`.
+- **Depende de** respostas da GP → **entrega:** fórmula validada.
+- **Pronto quando:** o caso de referência dá o mesmo resultado, com 2 casas.
+
+### GO3 — Portão: pronto para homologar (~5/1)
+- **Pronto quando:** O8 a O12 juntados e o ambiente de homologação publicado.
+
+### O13 — Homologação com a GP (Davi e Daniel 3 h cada)
+- **Construir:** a GP monta e roda um ciclo de teste no ambiente publicado, do cadastro ao relatório; a equipe registra os ajustes e decide com a GP o que entra antes do primeiro ciclo real.
+- **Depende de** GO3 → **entrega:** homologação registrada.
+- **Pronto quando:** a GP aprova, ou a lista de ajustes tem dono e data.
