@@ -106,7 +106,7 @@ As tarefas estão em [`TAREFAS.md`](TAREFAS.md), com responsável, revisor, hora
 
 | Entrega | Escopo | Previsão |
 |---|---|---|
-| MVP operacional, parte 1: avaliação | Google OAuth restrito ao domínio, cadastro e importação de pessoas, importação do questionário e do mapa, regras de visibilidade, e-mail, homologação publicada e homologação com a GP, fórmula validada pela GP. Escopo do primeiro ciclo real e ordem: D-19 e D-20 | **Até o início de janeiro de 2027** (D-20, 25/11): prazo máximo; antes, se o escopo ficar pronto |
+| MVP operacional, parte 1: avaliação | Google OAuth restrito ao domínio, cadastro e importação de pessoas, importação do questionário e do mapa, homologação publicada e homologação com a GP, fórmula validada pela GP. Escopo do primeiro ciclo real e ordem: D-19 e D-20. Visibilidade das perguntas (A1) e e-mail (D3) ficam para depois da homologação (D-20) | **Até o início de janeiro de 2027** (D-20, 25/11): prazo máximo; antes, se o escopo ficar pronto |
 | MVP operacional, parte 2: pesquisas anônimas enxutas | Anonimato por desenho, público simples, rascunho local, dashboard com mínimo no servidor | ~22/1/2027 (P80) |
 | Produção institucional | Supabase Pro com backup e teste de restauração, produção sem desenvolvedores, log de auditoria, retenção e base legal pela LGPD, OAuth interno, liberação assinada pelo diretor de GP, um ciclo em paralelo com o Impulse Up | fevereiro a março de 2027 |
 
