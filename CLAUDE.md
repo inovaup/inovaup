@@ -64,8 +64,12 @@ InovaUp é o sistema interno de gestão de pessoas da Empresa Júnior ADM UFBA, 
 ## Piso de segurança (não se corta para cumprir prazo)
 
 - **RLS ligada e negando por padrão em todas as tabelas**; dados sensíveis lidos só no servidor; `requireRole()` em toda leitura e escrita sensível.
-- **Papel** (`colaborador`, `lider`, `gp`) fica na tabela `perfis`, escrito **só pela semente com a chave `service_role`**. Não existe política de UPDATE de `papel` para usuários. **Nunca guarde papel em `user_metadata`.**
-- **Cadastro desligado** no Supabase. Contas fictícias só pela semente. **Não existe login que pule a autenticação.**
+- **Papel** (`colaborador`, `lider`, `gp`) fica na tabela `perfis`. Não existe política de UPDATE de `papel` para usuários. **Nunca guarde papel em `user_metadata`.**
+  - **Na demo:** o papel é escrito **só pela semente com a chave `service_role`**.
+  - **A partir da O1 (D-21):** o papel muda **só por funções do banco que exigem GP e registram** quem mudou, de quem, de qual papel para qual e quando. O cadastro só cria `colaborador` ou `lider`. Ninguém muda o próprio papel, e o sistema nunca fica sem GP. A primeira GP nasce uma vez, por uma função de uso único no esquema `private`, com o `EXECUTE` revogado de `public`, `anon`, `authenticated` e `service_role`, rodada no painel com a assinatura do diretor de GP.
+- **Contas e cadastro.** **Não existe login que pule a autenticação.**
+  - **Na demo:** cadastro desligado no Supabase; contas fictícias só pela semente.
+  - **A partir da O1 e da O2 (D-21):** a pessoa existe em `perfis` antes da conta. Conta nova só pelo login Google do domínio e só para quem está cadastrado (gancho Before User Created e gatilho em `auth.users`). Login por e-mail desligado na homologação e na produção. As regras de acesso passam pela função "qual é a minha pessoa", que não devolve quem está `desligada`: essa pessoa não lê nem grava nada.
 - A chave **`service_role`** só pode ser usada em dois lugares:
   1. no script de semente;
   2. no módulo `server-only` `src/modules/avaliacao/calculo/executar.ts`, chamado só depois de `requireRole('gp')`.
