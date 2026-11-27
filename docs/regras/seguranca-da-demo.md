@@ -52,7 +52,7 @@ Regras de uso da chave e de cache:
 
 O relatório publicável é montado por `montarRelatorioPublicavel()` (função pura, A7) **antes de ser gravado** pela execução do cálculo (A6). A supressão acontece no dado, não só na tela.
 
-- **Mínimo:** `MIN_AVALIADORES_POR_RECORTE = 2`. É provisório até a GP responder a pergunta 7.
+- **Mínimo:** `MIN_AVALIADORES_POR_RECORTE = 2`. É provisório até a GP responder a pergunta 14.
 - **Avaliadores além da própria pessoa:** quem respondeu (com atribuição enviada e pelo menos uma resposta que não seja N/A) nos grupos gestor, pares e liderados.
 
 | Regra | O que o relatório publica |

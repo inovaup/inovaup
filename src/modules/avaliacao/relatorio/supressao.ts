@@ -14,7 +14,7 @@ import {
   type Secao,
 } from "@/contracts/avaliacao";
 
-/** Provisório até a GP responder a pergunta 7 (mínimo de respostas). */
+/** Provisório até a GP responder a pergunta 14 (mínimo de avaliadores na avaliação). */
 export const MIN_AVALIADORES_POR_RECORTE = 2;
 
 export const AVISO_INSUFICIENTE =
