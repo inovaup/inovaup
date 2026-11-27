@@ -2,7 +2,7 @@
 
 Registrado em 20/11/2026; as perguntas 14 a 25 entraram em 26/11/2026, a partir da auditoria do MVP e da P-10 (cadastro de pessoas). Responder junto com o Diretor de Gestão de Pessoas. A numeração das perguntas 1 a 13 não muda, porque o código e os documentos citam esses números.
 
-**Mais urgentes, antes de 5/12** (início do MVP operacional): **2, 10, 13, 20, 23 e 25**. Elas travam o login, o cadastro de pessoas e o mapa de quem avalia quem. As perguntas 1, 3, 14, 16, 17 e 18 são necessárias para montar o primeiro ciclo real.
+**Mais urgentes, antes de 5/12** (início do MVP operacional): **2, 10, 13, 20, 23 e 25**. Elas travam o login, o cadastro de pessoas e o mapa de quem avalia quem. As perguntas 1, 3, 9, 14, 16, 17 e 18 são necessárias antes do primeiro ciclo real; a 9 (retenção) porque o portão de dados reais exige a retenção definida antes de qualquer dado real.
 
 ## Avaliação de desempenho
 
@@ -44,9 +44,9 @@ Registrado em 20/11/2026; as perguntas 14 a 25 entraram em 26/11/2026, a partir 
 
 ## Avaliação de desempenho: novas perguntas (26/11)
 
-14. **Mínimo de avaliadores na avaliação:** no InovaUp, a nota de um grupo (gestor, pares, liderados) só aparece com 2 ou mais pessoas, para ninguém descobrir a nota de uma pessoa só. O mínimo de 2 está bom, ou preferem 3? (A pergunta 7 é sobre as pesquisas.)
+14. **Mínimo de avaliadores na avaliação:** para ninguém descobrir a nota dada por uma pessoa, o relatório só mostra a nota final, a nota de cada competência e os comentários quando há pelo menos 2 avaliadores além da própria pessoa. As notas por grupo (gestor, pares, liderados) só aparecem separadas se todos os grupos tiverem 2 ou mais; quem tem um só gestor vê só a nota combinada dos outros avaliadores. O mínimo de 2 está bom, ou preferem 3? Com 3, quem tiver só 2 avaliadores fica sem resultado consolidado. (A pergunta 7 é sobre as pesquisas.)
     - Resposta:
-15. **Comentários:** hoje o InovaUp pede um comentário por seção. Vocês preferem um por competência, como no Impulse Up? O comentário deve ser obrigatório quando a nota é muito baixa ou muito alta?
+15. **Comentários:** hoje o InovaUp aceita um comentário por seção, opcional. Vocês preferem um por competência, como no Impulse Up? O comentário deve ser obrigatório quando a nota é muito baixa ou muito alta?
     - Resposta:
 16. **Texto das competências:** além do título (ex.: "Cumpre prazos"), cada competência tem uma pergunta ou descrição que orienta a nota? Podem nos mandar esses textos? (Eles não têm dados de pessoas.)
     - Resposta:
@@ -67,7 +67,7 @@ Registrado em 20/11/2026; as perguntas 14 a 25 entraram em 26/11/2026, a partir 
 
 23. **Cadastro antes do primeiro login:** a GP topa cadastrar (ou importar por planilha) as pessoas antes de elas entrarem pela primeira vez? Só quem estiver cadastrado vai conseguir entrar.
     - Resposta:
-24. **Contas de quem sai da EJ:** quando alguém sai, a conta Google da empresa é desativada? Em quanto tempo?
+24. **Contas de quem sai da EJ:** quando alguém sai, a conta Google da empresa é desativada? Em quanto tempo? Quem avisa a GP no dia da saída, para marcar a pessoa como desligada no InovaUp?
     - Resposta:
 25. **Quem pode tornar alguém GP:** basta uma pessoa da GP, ou tornar alguém GP deve exigir a confirmação de uma segunda? Quem assina a criação do primeiro perfil de GP (o diretor)? Complementa a pergunta 10.
     - Resposta:

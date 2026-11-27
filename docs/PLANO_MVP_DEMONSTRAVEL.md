@@ -69,7 +69,7 @@ Resumo; o detalhe está em [`regras/seguranca-da-demo.md`](regras/seguranca-da-d
 ## 5. Proteção contra identificação indireta
 
 Resumo; o detalhe está em [`regras/seguranca-da-demo.md`](regras/seguranca-da-demo.md):
-- mínimo de **2 avaliadores por recorte** (provisório até a pergunta 7 da GP);
+- mínimo de **2 avaliadores por recorte** (provisório até a pergunta 14 da GP);
 - se **qualquer grupo** além da autoavaliação tiver 1 respondente, **nenhum grupo aparece separado** (supressão complementar, para evitar a dedução por subtração);
 - com menos de 2 avaliadores além da própria pessoa, só a autoavaliação aparece, com um aviso;
 - comentários reunidos, sem autor e sem grupo, em ordem neutra;
