@@ -123,7 +123,7 @@ Resumo de [`docs/decisoes.md`](docs/decisoes.md):
 [Pendente]
 - **P-01:** segundo assento do Claude (recomendado).
 - **P-02:** hospedagem do MVP operacional.
-- **P-03:** as 13 perguntas à GP ([`docs/referencias/perguntas-pendentes-gp.md`](docs/referencias/perguntas-pendentes-gp.md)). Elas **não bloqueiam a demo**.
+- **P-03:** as perguntas à GP (21 desde 27/11) ([`docs/referencias/perguntas-pendentes-gp.md`](docs/referencias/perguntas-pendentes-gp.md)). Elas **não bloqueiam a demo**.
 - **P-04:** Google Workspace e app OAuth interno.
 - **P-05:** quem guarda a chave do pseudônimo.
 - **P-06:** orçamento dos planos pagos.
