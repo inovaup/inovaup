@@ -88,7 +88,7 @@ Janela normal, **GP**:
 - **MVP operacional (~18/12):** login com a conta Google da empresa, cadastro e importação das pessoas, questionário e mapa "quem avalia quem" importados, e-mail, versão publicada e a **fórmula validada pela GP**.
 - **Pesquisas anônimas (~22/1/2027).**
 - **Produção (fevereiro a março de 2027):** backup, LGPD, um ciclo em paralelo com o Impulse Up antes de trocar.
-- Precisamos da GP para: as 13 perguntas pendentes (pesos reais, quem avalia quem, mínimo de respostas, retenção…) e um caso de referência para validar a fórmula.
+- Precisamos da GP para: as perguntas pendentes (pesos reais, quem avalia quem, mínimo de respostas, retenção…) e um caso de referência para validar a fórmula.
 
 ## 4. Se algo der errado
 

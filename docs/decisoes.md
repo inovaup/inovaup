@@ -33,7 +33,7 @@ Registro curto. Uma decisão nova ou mudada entra aqui por PR revisado pelo outr
 |---|---|---|---|
 | P-01 | Segundo assento do Claude (recomendado) | Dono da conta Team | O quanto antes |
 | P-02 | Hospedagem do MVP operacional (Vercel Pro, cerca de US$ 20 por autor de commit por mês, ou outra) | Diretoria | Antes do MVP operacional, parte 1 (início de janeiro, D-20) |
-| P-03 | As 13 perguntas da GP (pesos reais, quem avalia quem, seções Processos, calibração, quem vê o relatório, mínimo de respostas, retenção, administradores, migração, DNS, OAuth) | Diretoria de GP | Ideal até 25/11; não bloqueiam a demo |
+| P-03 | As perguntas da GP: 13 em 20/11 (pesos reais, quem avalia quem, seções Processos, calibração, quem vê o relatório, mínimo de respostas, retenção, administradores, migração, DNS, OAuth) e 21 desde 27/11 (mais a seção só com autoavaliação, comentários, regras e formato do formulário, trainees, liberação, lembretes, média e histórico); a numeração de 1 a 13 não muda | Diretoria de GP | Ideal até 25/11; não bloqueiam a demo |
 | P-04 | Confirmar o Google Workspace e o superadministrador; app OAuth interno | Diretor de GP | Antes do MVP operacional |
 | P-05 | Quem guarda a chave do pseudônimo das pesquisas (e o novo texto do RNF-02) | Diretoria de GP | Antes das pesquisas |
 | P-06 | Orçamento dos planos pagos (Supabase Pro no portão de dados reais) | Diretoria | Antes da produção |
